@@ -16,6 +16,7 @@
 #include "envt.h"
 #include "dets.h"
 #include "string.h"
+#include "getline.h"
 
 extern char **environ;
 

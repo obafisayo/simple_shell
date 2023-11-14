@@ -9,7 +9,7 @@
 bool read_dets(dets_t *dets)
 {
     if (dets->from_terminal)
-	   write(STDERR_filenom, "$ ", 2);
+	   write(STDERR_FILENO, "$ ", 2);
 
     dets->linenom += 1;
 
@@ -18,7 +18,7 @@ bool read_dets(dets_t *dets)
 	   return false;
     }
 
-    while (line[strlen(line) - 1] == '\\' && _getline(dets->filenom))
+    while (line[_strlen(line) - 1] == '\\' && _getline(dets->filenom))
     {
 	   if (dets->from_terminal)
 		  write(STDERR_FILENO, "> ", 2);
