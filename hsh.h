@@ -15,9 +15,11 @@
 #include "dict.h"
 #include "envt.h"
 #include "dets.h"
+#include "string.h"
 
 extern char **environ;
 
+bool read_dets(dets_t *dets);
 void _sigint(int signal);
 
 #endif /* _HSH_H_*/

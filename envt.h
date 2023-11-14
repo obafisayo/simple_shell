@@ -5,6 +5,7 @@
 #include <sys/types.h>
 
 #include "typedef.h"
+#include "string.h"
 #include "dict.h"
 
 typedef dict_t envt_t;

@@ -48,7 +48,7 @@ dict_t *dict_get_node(dict_t *head, const char *key)
 		return (NULL);
 	if (_strcmp(head->key, key) == 0)
 		return (head);
-	return (get_dict_node(head->next_node, key));
+	return (dict_get_node(head->next_node, key));
 }
 
 /**

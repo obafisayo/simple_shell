@@ -7,5 +7,5 @@
 */
 bool read_dets(dets_t *dets)
 {
-     
+	
 }

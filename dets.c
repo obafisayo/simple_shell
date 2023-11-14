@@ -14,27 +14,27 @@
 
 dets_t *init_dets(int argc, char **argv)
 {
-     static dets_t dets;
-     char *err = NULL;
+	static dets_t dets;
+	char *err = NULL;
 
-     dets.argc = argc;
-     dets.argv = argv;
-     dets.filenom = STDIN_FILENO;
-     if (argc > 1)
-     {
-          dets.file = argv[1];
-          dets.filenom = open(dets.file, O_RDONLY);
-          if (dets.filenom == -1)
-          {
-               dets.status = 127;
-               exit(free_dets(&dets));
-          }
-     }
-     dets.from_terminal = isatty(dets.filenom);
-     dets.my_pid = getpid();
-     dets.cwd = getcwd(NULL, 0);
-     dets.envt = envt_to_dict(environ);
-     return (&dets);
+	dets.argc = argc;
+	dets.argv = argv;
+	dets.filenom = STDIN_FILENO;
+	if (argc > 1)
+	{
+		dets.file = argv[1];
+		dets.filenom = open(dets.file, O_RDONLY);
+		if (dets.filenom == -1)
+		{
+			dets.status = 127;
+			exit(free_dets(&dets));
+		}
+	}
+	dets.from_terminal = isatty(dets.filenom);
+	dets.my_pid = getpid();
+	dets.cwd = getcwd(NULL, 0);
+	dets.envt = envt_to_dict(environ);
+	return (&dets);
 }
 
 /**
@@ -44,7 +44,7 @@ dets_t *init_dets(int argc, char **argv)
  */
 int free_dets(dets_t *dets)
 {
-     free(dets->cwd);
-     dets->cwd = NULL;
-     free_dict(&dets->envt);
+	free(dets->cwd);
+	dets->cwd = NULL;
+	free_dict((dict_t**)&dets->envt);
 }

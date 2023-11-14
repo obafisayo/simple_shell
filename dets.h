@@ -7,6 +7,7 @@
 #include "typedef.h"
 #include "dict.h"
 #include "envt.h"
+#include "string.h"
 
 extern char **environ;
 
@@ -23,15 +24,15 @@ extern char **environ;
 */
 struct dets
 {
-     char **argv;
-     int argc;
-     int from_terminal;
-     int filenom;
-     int status;
-     char *file;
-     char *cwd;
-     pid_t my_pid;
-     envt_t envt;
+	char **argv;
+	int argc;
+	int from_terminal;
+	int filenom;
+	int status;
+	char *file;
+	char *cwd;
+	pid_t my_pid;
+	envt_t *envt;
 };
 
 dets_t *init_dets(int argc, char **argv);

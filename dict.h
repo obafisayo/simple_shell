@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "typedef.h"
+#include "string.h"
 
 /**
  * struct dict - This is a singly linked list of key=value pairs
@@ -13,9 +14,9 @@
 */
 struct dict
 {
-     char *key;
-     char *value;
-     struct dict *next_node;
+	char *key;
+	char *value;
+	struct dict *next_node;
 };
 
 dict_t *dict_add_node_end(dict_t **headptr, const char *key, const char *value);
