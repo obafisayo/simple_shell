@@ -31,6 +31,8 @@ struct dets
 	int status;
 	char *file;
 	char *cwd;
+	char *line;
+	size_t linenom;
 	pid_t my_pid;
 	envt_t *envt;
 };
