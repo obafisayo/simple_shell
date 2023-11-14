@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	signal(2, _sigint);
 	while (read_dets(dets))
 	{
-		printf("read details")
+		printf("read details");
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);
