@@ -37,7 +37,7 @@ bool read_dets(dets_t *dets)
 	temp = line;
 	while ((backslash_pos = _strchr(temp, '\\')) != -1)
 	{
-		line[old_pos + backslash_pos] = '\0';
+		line[old_pos + backslash_pos] = '\n';
 		temp += backslash_pos + 1;
 		old_pos += backslash_pos + 1;
 	}
