@@ -8,6 +8,7 @@
 #include "dict.h"
 #include "envt.h"
 #include "string.h"
+#include "err.h"
 
 extern char **environ;
 

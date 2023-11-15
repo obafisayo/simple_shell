@@ -26,6 +26,9 @@ dets_t *init_dets(int argc, char **argv)
 		dets.filenom = open(dets.file, O_RDONLY);
 		if (dets.filenom == -1)
 		{
+			err = strjoin(NULL, " ", "Can't open", dets.file);
+			perrorl_default(*argv, dets.linenom, err, NULL);
+			free(err);
 			dets.status = 127;
 			exit(free_dets(&dets));
 		}
@@ -47,4 +50,5 @@ int free_dets(dets_t *dets)
 	free(dets->cwd);
 	dets->cwd = NULL;
 	free_dict((dict_t**)&dets->envt);
+	return (dets->status);
 }

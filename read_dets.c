@@ -20,6 +20,20 @@ bool read_dets(dets_t *dets)
 		return false;
 	}
 
+	while (line[_strlen(line) - 2] == '\\' && _getline(dets->filenom))
+	{
+		if (dets->from_terminal)
+		{
+			write(STDOUT_FILENO, "> ", 2);
+		}
+		dets->linenom += 1;
+
+		temp = line;
+		line = strjoin(NULL, "", temp, dets->line);
+		free(temp);
+		free(dets->line);
+	}
+
 	dets->line = line;
 
 	return true;

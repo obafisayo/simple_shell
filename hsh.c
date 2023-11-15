@@ -12,10 +12,11 @@ int main(int argc, char **argv)
 {
 	dets_t *dets = init_dets(argc, argv);
 
-	signal(2, _sigint);
+	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
 		printf("%s", dets->line);
+		free(dets->line);
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);
