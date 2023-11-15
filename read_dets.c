@@ -9,7 +9,7 @@
 bool read_dets(dets_t *dets)
 {
 	char *temp, *line;
-	ssize_t backslash_pos;
+	ssize_t backslash_pos, old_pos = 0;
 	
 	if (dets->from_terminal)
 		write(STDERR_FILENO, "$ ", 2);
@@ -35,12 +35,12 @@ bool read_dets(dets_t *dets)
 		free(temp);
 	}
 	temp = line;
-	while (_strlen(temp) > 0 && (backslash_pos = _strchr(temp, '\\')))
+	while ((backslash_pos = _strchr(temp, '\\')) != -1)
 	{
-		temp[backslash_pos] = '\0';
-		temp += backslash_pos;
+		line[old_pos + backslash_pos] = '\0';
+		temp += backslash_pos + 1;
+		old_pos += backslash_pos + 1;
 	}
-	line = temp;
 	free(temp);
 	dets->line = line;
 
