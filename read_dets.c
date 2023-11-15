@@ -34,14 +34,14 @@ bool read_dets(dets_t *dets)
 		line = strjoin(NULL, "", temp, _getline(dets->filenom));
 		free(temp);
 	}
-	while (_strlen(line) > 0 && (backslash_pos = _strchr(line, '\\')) != -1)
+	temp = line;
+	while (_strlen(temp) > 0 && (backslash_pos = _strchr(temp, '\\')))
 	{
-		line[backslash_pos] = '\0';
-		temp = line;
-		line = strjoin(NULL, "", temp, _getline(dets->filenom));
-		free(temp);
+		temp[backslash_pos] = '\0';
+		temp += backslash_pos;
 	}
-
+	line = temp;
+	free(temp);
 	dets->line = line;
 
 	return true;
