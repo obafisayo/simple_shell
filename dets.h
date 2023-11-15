@@ -9,6 +9,7 @@
 #include "envt.h"
 #include "string.h"
 #include "err.h"
+#include "getline.h"
 
 extern char **environ;
 
@@ -21,7 +22,12 @@ extern char **environ;
  * @status: stores the status of the shell
  * @file: stores the file name if present
  * @cwd: stores the current working directory
+ * @line: stores the inputed line
+ * @exe: stores an executabe string
+ * @tokens: stores an array of delimited string
+ * @linenom: stores the no of lines
  * @my_pid: stores the current pid value
+ * @envt: stores a duplicate of the environ string
 */
 struct dets
 {
@@ -33,9 +39,12 @@ struct dets
 	char *file;
 	char *cwd;
 	char *line;
+	char *exe;
+	char **tokens;
 	size_t linenom;
 	pid_t my_pid;
 	envt_t *envt;
+	list_t *path;
 };
 
 dets_t *init_dets(int argc, char **argv);

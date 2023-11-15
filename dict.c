@@ -12,11 +12,11 @@ dict_t *dict_add_node_end(dict_t **headptr, const char *key, const char *value)
 	dict_t *new_node, *current;
 
 	if (!headptr)
-		return NULL;
+		return (NULL);
 
 	new_node = malloc(sizeof(dict_t));
 	if (!new_node)
-		return NULL;
+		return (NULL);
 
 	new_node->key = _strdup(key);
 	new_node->value = _strdup(value);
@@ -25,7 +25,8 @@ dict_t *dict_add_node_end(dict_t **headptr, const char *key, const char *value)
 	if (*headptr == NULL)
 	{
 		*headptr = new_node;
-	} else {
+	} else
+	{
 		current = *headptr;
 		while (current->next_node != NULL)
 		{
@@ -82,17 +83,19 @@ dict_t *dict_del_node(dict_t **headptr, const char *key)
 	dict_t *current, *prev;
 
 	if (!headptr || !(*headptr))
-		return NULL;
+		return (NULL);
 
 	current = *headptr;
 	prev = NULL;
-
-	while (current != NULL) {
+	while (current != NULL)
+	{
 		if (_strcmp(current->key, key) == 0)
 		{
-			if (prev == NULL) {
+			if (prev == NULL)
+			{
 				*headptr = current->next_node;
-			} else {
+			} else
+			{
 				prev->next_node = current->next_node;
 			}
 
@@ -105,7 +108,6 @@ dict_t *dict_del_node(dict_t **headptr, const char *key)
 		prev = current;
 		current = current->next_node;
 	}
-
 	return (*headptr);
 }
 

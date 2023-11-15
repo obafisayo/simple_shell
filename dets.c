@@ -3,6 +3,7 @@
 #include <sys/stat.h>
 #include <stdio.h>
 
+#include "hsh.h"
 #include "dets.h"
 
 /**
@@ -41,14 +42,19 @@ dets_t *init_dets(int argc, char **argv)
 }
 
 /**
- * free_info - free and nullify dynamically allocated info
- * @info: pointer to the info
+ * free_dets - free and nullify dynamically allocated info
+ * @dets: pointer to the info
  * Return: current exit status
  */
 int free_dets(dets_t *dets)
 {
+	free(dets->line);
+	dets->line = _getline(-1);
+	free_tokens(&dets->tokens);
+	free(dets->exe);
+	dets->exe = NULL;
 	free(dets->cwd);
 	dets->cwd = NULL;
-	free_dict((dict_t**)&dets->envt);
+	free_dict((dict_t **)&dets->envt);
 	return (dets->status);
 }

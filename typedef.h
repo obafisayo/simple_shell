@@ -3,5 +3,6 @@
 
 typedef struct dets dets_t;
 typedef struct dict dict_t;
+typedef struct list_s list_t;
 
 #endif /* _TYPEDEF_H_*/

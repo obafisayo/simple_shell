@@ -15,9 +15,20 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
+		parse_dets(dets);
 		printf("%s", dets->line);
-		
+		while (dets->tokens)
+		{
+			exec(dets);
+			free_tokens(&(dets->tokens));
+		}
+		while (*dets->tokens == "env")
+		{
+			printf("%s=%s\n", dets->envt->key, dets->envt->value);
+			dets->envt = dets->envt->next_node;
+		}
 		free(dets->line);
+		dets->line = NULL;
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);

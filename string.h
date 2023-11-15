@@ -5,6 +5,8 @@
 #include <stdarg.h>
 #include <sys/types.h>
 
+#include "getline.h"
+
 ssize_t _memchr(const void *src, unsigned char chr, size_t n);
 void *_memcpy(void *dest, const void *src, size_t n);
 void *_memdup(const void *src, size_t n);
@@ -28,6 +30,9 @@ ssize_t _strnlen(const char *str, size_t n);
 char *strjoin(size_t *n, const char *sep, const char *pre, const char *suf);
 char *strjoina(size_t *n, const char *sep, const char **array);
 char *strjoinl(size_t *n, const char *sep, ...);
+
+char *_strtok(char *str, const char *delim);
+char **split_string(const char *string, const char *delim);
 
 unsigned int atou(char *s);
 char *num_to_str(size_t n);
