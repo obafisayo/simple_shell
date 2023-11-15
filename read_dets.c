@@ -20,7 +20,7 @@ bool read_dets(dets_t *dets)
 		return false;
 	}
 
-	while (_strlen(line) > 0 && line[_strlen(line) - 1] == '\\')
+	while (_strlen(line) > 0 && line[_strlen(line) - 2] == '\\')
 	{
 		if (dets->from_terminal)
 		{
