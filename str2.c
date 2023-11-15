@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "string.h"
+#include <string.h>
 
 /**
  * _strtok - This function works the same way as the _strtok function.
