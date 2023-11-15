@@ -20,7 +20,7 @@ bool read_dets(dets_t *dets)
 		return false;
 	}
 
-	while (line[_strlen(line) - 1] == '\\' && _getline(dets->filenom))
+	while (_strlen(line) > 0 && line[_strlen(line) - 1] == '\\')
 	{
 		if (dets->from_terminal)
 		{
@@ -28,10 +28,10 @@ bool read_dets(dets_t *dets)
 		}
 		dets->linenom += 1;
 
+		line[_strlen(line) - 1] = '\0';
 		temp = line;
-		line = strjoin(NULL, "", temp, dets->line);
+		line = strjoin(NULL, "", temp, _getline(dets->filenom));
 		free(temp);
-		free(dets->line);
 	}
 
 	dets->line = line;
