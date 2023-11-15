@@ -16,6 +16,7 @@ int main(int argc, char **argv)
 	while (read_dets(dets))
 	{
 		printf("%s", dets->line);
+		
 		free(dets->line);
 	}
 	if (dets->from_terminal)
