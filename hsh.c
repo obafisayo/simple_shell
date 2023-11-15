@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 			exec(dets);
 			free_tokens(&(dets->tokens));
 		}
-		while (*dets->tokens == "env")
+		while (_strcmp(*dets->tokens, "env") == 0)
 		{
 			printf("%s=%s\n", dets->envt->key, dets->envt->value);
 			dets->envt = dets->envt->next_node;
