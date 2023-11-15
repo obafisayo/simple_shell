@@ -18,7 +18,7 @@ bool read_dets(dets_t *dets)
 
 	line = _getline(dets->filenom);
 	if (!line) {
-		return false;
+		return (false);
 	}
 
 	while (_strlen(line) > 0 && line[_strlen(line) - 2] == '\\')
@@ -41,8 +41,7 @@ bool read_dets(dets_t *dets)
 		temp += backslash_pos + 1;
 		old_pos += backslash_pos + 1;
 	}
-	free(temp);
 	dets->line = line;
-
-	return true;
+	free(line);
+	return (true);
 }
