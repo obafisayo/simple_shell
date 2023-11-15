@@ -10,29 +10,33 @@
 
 /**
  * struct buf_s - input buffer
- * @buffer: This is the buffer
- * @next: This is the pointer to the next value
- * @remaining: This is the number of values remaining
+ * @buffer: the buffer
+ * @next: pointer to the next value
+ * @remaining: number of values remaining
  */
-typedef struct {
-    char buffer[GETLINE_BUFFER_SIZE];
-    char *next;
-    size_t remaining;
+typedef struct buf_s
+{
+	char buffer[GETLINE_BUFFER_SIZE];
+	char *next;
+	size_t remaining;
 } buf_t;
 
+#define GETLINE_TABLE_SIZE 127
+
 /**
- * struct buf_table_node_s - This is the input buffer hash table
- * @fd: This is the file descriptor
- * @buf: This is the associated buffer
- * @next: this is the next buffer in chain
+ * struct buf_table_node_s - input buffer hash table
+ * @fd: file descriptor
+ * @buf: associated buffer
+ * @next: next buffer in chain
  */
-typedef struct buf_table_node_s {
-    int fd;
-    buf_t buf;
-    struct buf_table_node_s *next;
+typedef struct buf_table_node_s
+{
+	int fd;
+	struct buf_s buf;
+	struct buf_table_node_s *next;
 } buf_table_node_t;
 
-typedef buf_table_node_t *buf_table_t[127];
+typedef buf_table_node_t *buf_table_t[GETLINE_TABLE_SIZE];
 
 char *_getline(const int fd);
 
