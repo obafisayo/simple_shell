@@ -20,7 +20,7 @@ bool read_dets(dets_t *dets)
 		return false;
 	}
 
-	while (line[_strlen(line) - 2] == '\\' && _getline(dets->filenom))
+	while (line[_strlen(line) - 1] == '\\' && _getline(dets->filenom))
 	{
 		if (dets->from_terminal)
 		{
