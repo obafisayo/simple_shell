@@ -3,7 +3,6 @@
 /**
  * exec - This is used to execute the commands
  * @dets: This points to the details for execution
- * 
  * Return: This returns the status
 */
 int exec(dets_t *dets)
@@ -62,7 +61,7 @@ int _exec(dets_t *dets)
 
 		if (dets->file)
 			close(dets->filenom);
-		
+
 		free(exec);
 		free_string_array(av);
 		free_string_array(envt);

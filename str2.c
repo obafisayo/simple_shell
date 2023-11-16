@@ -6,11 +6,11 @@
  * _strtok - This function works the same way as the _strtok function.
  * @str: This is the string to be tokenized
  * @delim: This is the delimiter
- * Return: returns a pointer to the next token, or NULL if there are no more tokens.
+ * Return: returns a pointer to the next token
 */
 char *_strtok(char *str, const char *delim)
 {
-	static char *lastToken = NULL;
+	static char *lastToken;
 	char *tokenStart;
 
 	if (str == NULL)
@@ -33,7 +33,7 @@ char *_strtok(char *str, const char *delim)
 	}
 	else
 		lastToken = NULL;
-	return tokenStart;
+	return (tokenStart);
 }
 
 /**
@@ -88,11 +88,10 @@ char **split_string(const char *string, const char *delim)
 void free_string_array(char **array)
 {
 	size_t i;
-	if (array == NULL) {
+
+	if (array == NULL)
 		return;
-	}
-	for (i = 0; array[i] != NULL; i++) {
+	for (i = 0; array[i] != NULL; i++)
 		free(array[i]);
-	}
 	free(array);
 }
