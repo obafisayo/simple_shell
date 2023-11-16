@@ -11,6 +11,7 @@
 #include "string.h"
 #include "typedef.h"
 #include "ctype.h"
+#include "list.h"
 
 #define ALIAS_HELP "alias [KEY[=VALUE] ...]"
 #define ALIAS_DESC								\

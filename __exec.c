@@ -18,7 +18,7 @@ int __exec(dets_t *dets)
 	if (_strchr(*args, '/') == -1)
 	{
 		free_list(&dets->path);
-		dets->path = str_to_list(dict_get_val(dets->envt, "PATH"), ':');
+		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		exe = get_path(dets, dets->path);
 	}
 	else
@@ -29,21 +29,21 @@ int __exec(dets_t *dets)
 
 	if (access(exe, X_OK) == 0)
 	{
-		env = dict_to_env(dets->envt);
+		env = dict_to_envt(dets->envt);
 
 		free_dets(dets);
 		execve(exe, args, env);
 		perrorl_default(*dets->argv, dets->linenom, "Not found",
 				*dets->tokens, *args, NULL);
 		free(exe);
-		free_tokens(&args);
-		free_tokens(&env);
+		free_string_array(&args);
+		free_string_array(&env);
 		exit(127);
 	}
 	perrorl_default(*dets->argv, dets->linenom, "Permission denied",
 			*dets->tokens, *args, NULL);
 	free(exe);
-	free_tokens(&args);
+	free_string_array(&args);
 	free_dets(dets);
 	exit(126);
 }

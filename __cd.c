@@ -62,7 +62,7 @@ int __cd(dets_t *dets)
 	{
 		if (!_strcmp(*args, "-"))
 		{
-			dir = dict_get_val(dets->envt, "OLDPWD");
+			dir = dict_get_value(dets->envt, "OLDPWD");
 			if (!dir)
 				dir = dets->cwd;
 
@@ -81,7 +81,7 @@ int __cd(dets_t *dets)
 	}
 	else
 	{
-		dir = dict_get_val(dets->envt, "HOME");
+		dir = dict_get_value(dets->envt, "HOME");
 		if (dir)
 			dets->status = chdir(dir);
 	}

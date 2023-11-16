@@ -7,7 +7,7 @@
   */
 int __env(dets_t *dets)
 {
-	env_t *var;
+	envt_t *var;
 
 	dets->status = EXIT_SUCCESS;
 
