@@ -16,7 +16,7 @@ bool read_dets(dets_t *dets)
 
 	dets->linenom += 1;
 
-	line = _getline(dets->filenom);
+	line = getline(dets->filenom);
 	if (!line) {
 		return (false);
 	}
@@ -31,7 +31,7 @@ bool read_dets(dets_t *dets)
 
 		line[_strlen(line) - 2] = '\0';
 		temp = line;
-		line = strjoin(NULL, "", temp, _getline(dets->filenom));
+		line = strjoin(NULL, "", temp, getline(dets->filenom));
 	}
 	temp = line;
 	while ((backslash_pos = _strchr(temp, '\\')) != -1)
