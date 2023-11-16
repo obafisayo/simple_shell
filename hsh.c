@@ -11,6 +11,7 @@
 int main(int argc, char **argv)
 {
 	int i;
+	size_t newSize;
 
 	dets_t *dets = init_dets(argc, argv);
 
@@ -22,8 +23,8 @@ int main(int argc, char **argv)
 		{
 			for (i = 0; dets->tokens[i] != NULL; i++)
 				;
-			size_t newSize = sizeof(char *) * (i + 1);
-			dets->tokens = realloc(dets->tokens, newSize);
+			newSize = sizeof(char *) * (i + 1);
+			dets->tokens = malloc(dets->tokens, newSize);
 			if (dets->tokens == NULL)
 			{
 				perror("Error reallocating memory");

@@ -24,13 +24,18 @@ int parse_dets(dets_t *dets)
 */
 void free_tokens(char ***tokens)
 {
-	size_t i;
+	char **tok;
 
 	if (!tokens)
 		return;
-	for (i = 0; tokens[i] != NULL; i++)
-	{
-		free(tokens[i]);
-	}
-	free(tokens);
+
+	tok = *tokens;
+	if (!tok)
+		return;
+
+	while (*tok)
+		free(*tok++);
+	free(*tokens);
+
+	*tokens = NULL;
 }
