@@ -13,5 +13,17 @@ int main(int argc, char **argv)
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
-	printf("ls oj"); 
+	while (read_dets(dets))
+	{
+		dets->tokens = split_string(dets->line, " ");
+		exec(dets);
+		if (dets->tokens != NULL)
+		{
+			free_string_array(dets->tokens);
+			dets->tokens = NULL;
+		}
+	}
+	if (dets->file)
+		close(dets->filenom);
+	exit(free_dets(dets));
 }
