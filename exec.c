@@ -8,7 +8,7 @@
 */
 int exec(dets_t *dets)
 {
-	if (_strchr(**dets->tokens, '/') == -1)
+	if (_strchr(*dets->tokens, '/') == -1)
 	{
 		free_list(&dets->path);
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
