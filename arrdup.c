@@ -1,4 +1,4 @@
-#include "tokens.h"
+#include "dets.h"
 
 /**
  * arrdup - duplicate a (NULL-terminated) array
