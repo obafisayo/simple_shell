@@ -42,6 +42,7 @@ dict_t *dict_add_node_end(dict_t **headptr, const char *key, const char *value)
  * dict_get_node - This is used to get a particular node using it's key
  * @head: This is the pointer
  * @key: This is the key
+ * Return: This is a pointer to the node found
 */
 dict_t *dict_get_node(dict_t *head, const char *key)
 {

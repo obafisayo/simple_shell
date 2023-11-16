@@ -9,7 +9,7 @@
 /**
  * struct dict - This is a singly linked list of key=value pairs
  * @key: This is the key variable
- * @val: This is the value variable of the key
+ * @value: This is the value variable of the key
  * @next_node: This is a pointer to the next key=value pair node
 */
 struct dict
@@ -19,7 +19,8 @@ struct dict
 	struct dict *next_node;
 };
 
-dict_t *dict_add_node_end(dict_t **headptr, const char *key, const char *value);
+dict_t *dict_add_node_end(dict_t **headptr,	\
+const char *key, const char *value);
 dict_t *dict_get_node(dict_t *head, const char *key);
 char *dict_get_value(dict_t *head, const char *key);
 dict_t *dict_del_node(dict_t **headptr, const char *key);

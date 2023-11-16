@@ -1,6 +1,6 @@
 #include "hsh.h"
 
-/** 
+/**
  * _sigint - This is a signal to check for ctrl c
  * @signal: This is a variable signal
 */

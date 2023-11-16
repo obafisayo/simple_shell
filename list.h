@@ -7,14 +7,14 @@
 #include "typedef.h"
 
 /**
- * struct list - This is a singly linked list
+ * struct list_s - This is a singly linked list
  * @str: This is a dynamically allocated string
  * @next: This is a pointer to the next node
  */
 struct list_s
 {
-     char *str;
-     struct list_s *next;
+	char *str;
+	struct list_s *next;
 };
 
 list_t *str_to_list(const char *str, char delim);

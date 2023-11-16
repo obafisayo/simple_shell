@@ -28,6 +28,7 @@ extern char **environ;
  * @linenom: stores the no of lines
  * @my_pid: stores the current pid value
  * @envt: stores a duplicate of the environ string
+ * @path: stores the path value
 */
 struct dets
 {
