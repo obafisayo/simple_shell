@@ -19,7 +19,6 @@ int main(int argc, char **argv)
 		while (dets->tokens)
 		{
 			process(dets);
-			free_tokens(&(dets->tokens));
 		}
 		free(dets->line);
 		dets->line = NULL;
