@@ -42,7 +42,7 @@ int exec(dets_t *dets)
  * _exec - This is used to fork and execute the current command
  * @dets: This is the shell details
  * Return: This is the exit status of the child process
-*/
+ */
 int _exec(dets_t *dets)
 {
 	char *exec, **av, **envt;
@@ -53,17 +53,7 @@ int _exec(dets_t *dets)
 		exec = dets->exe;
 		av = dets->tokens;
 		envt = dict_to_envt(dets->envt);
-		printf("thisis exec%s\n\n", exec);
-		while (*av)
-		{
-			printf("this is av%s\n", *av);
-			av++;
-		}
-		while (*envt)
-                {
-                        printf("thisi is envt%s\n", *envt);
-                        envt++;
-                }
+
 		dets->exe = NULL;
 		dets->tokens = NULL;
 		free_dets(dets);
@@ -73,9 +63,10 @@ int _exec(dets_t *dets)
 
 		if (dets->file)
 			close(dets->filenom);
-		
+
 		free(exec);
 		free_tokens(&av);
+		free_tokens(&envt);
 		exit(EXIT_FAILURE);
 		break;
 
