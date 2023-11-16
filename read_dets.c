@@ -19,7 +19,7 @@ bool read_dets(dets_t *dets)
 	size_t size = 0;
 	line = NULL;
 
-	if (getline(&line, &size, &(dets->filenom)) == -1)
+	if (getline(&line, &size, dets->filenom) == -1)
 	{
 		free(line);
 		return false;
@@ -35,7 +35,7 @@ bool read_dets(dets_t *dets)
 
 		line[_strlen(line) - 2] = '\0';
 		temp = line;
-		if (getline(&line, &size, &(dets->filenom)) == -1)
+		if (getline(&line, &size, dets->filenom) == -1)
 		{
 			free(temp);
 			return false;
