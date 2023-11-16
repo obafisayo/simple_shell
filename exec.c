@@ -10,9 +10,11 @@ int exec(dets_t *dets)
 {
 	if (_strchr(*dets->tokens, '/') == -1)
 	{
+		printf("/ detected");
 		free_list(&dets->path);
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		dets->exe = get_path(dets, dets->path);
+		printf("dets->exe path found = ", dets->exe);
 	}
 	else
 	{
