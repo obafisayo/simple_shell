@@ -44,5 +44,5 @@ envt_t *_envt_to_dict(envt_t **tailptr, char **env)
 	tail = dict_add_node_end(tailptr, env_str, env_str + key_len + 1);
 	free(env_str);
 
-	return (_env_to_dict(&tail, env + 1));
+	return (_envt_to_dict(&tail, env + 1));
 }
