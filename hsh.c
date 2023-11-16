@@ -22,6 +22,7 @@ int main(int argc, char **argv)
 		{
 			printf("token[%d]: %s\n", i, dets->tokens[i]);
 		}
+		
 		free_string_array(dets->tokens);
 	}
 	if (dets->from_terminal)
