@@ -47,7 +47,7 @@ char **split_string(const char *string, const char *delimiter)
 {
     int i, t;
     size_t len;
-    char *str, *token;
+    char *str, *token, *ntok;
     char **words_arr;
     const char *delim = delimiter;
 
@@ -59,7 +59,7 @@ char **split_string(const char *string, const char *delimiter)
         t++;
     }
     free(str);
-
+    free(token);
     words_arr = (char **)malloc((t + 1) * sizeof(char *));
     if (words_arr == NULL)
     {
@@ -77,11 +77,14 @@ char **split_string(const char *string, const char *delimiter)
         {
             token[len - 1] = '\0';
         }
-        words_arr[i] = _strdup(token);
+        ntok = _strdup(token);
+        words_arr[i] = ntok;
+        free(ntok);
         i++;
     }
     words_arr[i] = NULL;
     free(str);
+    free(token);
 
     return words_arr;
 }
