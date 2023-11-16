@@ -1,27 +1,23 @@
-#include <stdio.h>
 #include <stdlib.h>
-#include "string.h"
-#include <unistd.h>
 #include <string.h>
+#include "string.h"
 
 /**
- * split_string - Split a string into an array of strings based on a delimiter
+ * split_string - Split a string into an array of strings based on a delimiter string
  * @string: The input string to be split
- * @delimiter: The character used as a delimiter for splitting
+ * @delimiter: The delimiter string used for splitting
  * Return: An array of strings or NULL if memory allocation fails
  */
-char **split_string(const char *string, char delimiter)
+char **split_string(const char *string, const char *delimiter)
 {
     char **result = NULL;
     size_t count = 0;
     const char *temp = string;
     const char *delimiter_ptr = NULL;
 
-    while (*temp) {
-        if (*temp == delimiter) {
-            count++;
-        }
-        temp++;
+    while ((delimiter_ptr = strstr(temp, delimiter)) != NULL) {
+        count++;
+        temp = delimiter_ptr + strlen(delimiter);
     }
     count++;
 
@@ -33,7 +29,7 @@ char **split_string(const char *string, char delimiter)
     size_t i = 0;
     temp = string;
 
-    while ((delimiter_ptr = strchr(temp, delimiter)) != NULL) {
+    while ((delimiter_ptr = strstr(temp, delimiter)) != NULL) {
         size_t length = delimiter_ptr - temp;
         result[i] = (char *)malloc((length + 1) * sizeof(char));
         if (result[i] == NULL) {
@@ -45,7 +41,7 @@ char **split_string(const char *string, char delimiter)
         }
         strncpy(result[i], temp, length);
         result[i][length] = '\0';
-        temp = delimiter_ptr + 1;
+        temp = delimiter_ptr + strlen(delimiter);
         i++;
     }
 
