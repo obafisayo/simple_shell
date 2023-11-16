@@ -17,7 +17,7 @@ void process(dets_t *dets)
      if (child_pid == 0)
      {
           tokens = dets->tokens;
-          execute_file(tokens, &st, env, argv);
+          execute_file(tokens, &st, dets->envt, dets->argv);
           for (i = 0; tokens[i] != NULL; i++)
           {
                free(tokens[i]);
