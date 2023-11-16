@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "string.h"
 
 /**
@@ -10,53 +11,47 @@
  */
 char **split_string(const char *string, const char *delimiter)
 {
-    char **result = NULL;
-    size_t count = 0;
-    const char *temp = string;
-    const char *delimiter_ptr = NULL;
+    int i, t;
+    size_t len;
+    char *str, *token;
+    char **words_arr;
+    const char *delim = delimiter;
 
-    while ((delimiter_ptr = strstr(temp, delimiter)) != NULL) {
-        count++;
-        temp = delimiter_ptr + strlen(delimiter);
+    t = 0;
+    str = _strdup(string);
+    token = strtok(str, delim);
+    for (; token != NULL; token = strtok(NULL, delim))
+    {
+        t++;
     }
-    count++;
+    free(str);
 
-    result = (char **)malloc((count + 1) * sizeof(char *));
-    if (result == NULL) {
-        return NULL;
+    words_arr = (char **)malloc((t + 1) * sizeof(char *));
+    if (words_arr == NULL)
+    {
+        write(STDERR_FILENO, "Memory allocation failed", 25);
+        exit(1);
     }
 
-    size_t i = 0;
-    temp = string;
-
-    while ((delimiter_ptr = strstr(temp, delimiter)) != NULL) {
-        size_t length = delimiter_ptr - temp;
-        result[i] = (char *)malloc((length + 1) * sizeof(char));
-        if (result[i] == NULL) {
-            while (i > 0) {
-                free(result[--i]);
-            }
-            free(result);
-            return NULL;
+    i = 0;
+    str = _strdup(string);
+    token = strtok(str, delim);
+    for (; token != NULL; token = strtok(NULL, delim))
+    {
+        len = _strlen(token);
+        if (len > 0 && token[len - 1] == '\n')
+        {
+            token[len - 1] = '\0';
         }
-        strncpy(result[i], temp, length);
-        result[i][length] = '\0';
-        temp = delimiter_ptr + strlen(delimiter);
+        words_arr[i] = _strdup(token);
         i++;
     }
+    words_arr[i] = NULL;
+    free(str);
 
-    result[i] = strdup(temp);
-    if (result[i] == NULL) {
-        while (i > 0) {
-            free(result[--i]);
-        }
-        free(result);
-        return NULL;
-    }
-
-    result[count] = NULL;
-    return result;
+    return words_arr;
 }
+
 
 /**
  * free_string_array - Free the memory allocated for an array of strings
