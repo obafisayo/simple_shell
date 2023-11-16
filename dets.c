@@ -54,7 +54,6 @@ int free_dets(dets_t *dets)
 		dets->tokens = NULL;
 	}
 	free(dets->line);
-	dets->line = _getline(-1);
 	free(dets->cwd);
 	dets->cwd = NULL;
 	free(dets->exe);
