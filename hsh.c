@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 	{
 		while ((dets->tokens = split_string(dets->line, " ")))
 		{
-			exec(dets);
+			printf("%s", dets->line);
 		}
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{
