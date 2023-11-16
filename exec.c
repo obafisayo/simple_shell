@@ -14,7 +14,7 @@ int exec(dets_t *dets)
 		free_list(&dets->path);
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		dets->exe = get_path(dets, dets->path);
-		printf("dets->exe path found = ", dets->exe);
+		printf("dets->exe path found = %s", dets->exe);
 	}
 	else
 	{
