@@ -10,13 +10,19 @@
 
 int main(int argc, char **argv)
 {
+	int i;
+
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		printf("%s", dets->line);
-		free(dets->line);
+		dets->tokens = split_string(dets->line, " ");
+		for (i = 0; dets->tokens[i] != NULL; i++)
+		{
+			printf("token[%d]: %s\n", i, dets->tokens[i]);
+		}
+		free_word_arr(dets->tokens);
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);
