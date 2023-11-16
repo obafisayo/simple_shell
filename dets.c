@@ -24,7 +24,7 @@ dets_t *init_dets(int argc, char **argv)
 	if (argc > 1)
 	{
 		dets.file = argv[1];
-		dets.filenom = open(dets.file, O_RDONLY);
+		dets.filenom = fopen(dets.file, O_RDONLY);
 		if (dets.filenom == -1)
 		{
 			err = strjoin(NULL, " ", "Can't open", dets.file);
