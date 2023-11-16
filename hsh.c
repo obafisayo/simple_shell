@@ -16,9 +16,16 @@ int main(int argc, char **argv)
 	while (read_dets(dets))
 	{
 		parse_dets(dets);
+		printf("%s", dets->line);
 		while (dets->tokens)
 		{
-			printf
+			exec(dets);
+			free_tokens(&(dets->tokens));
+		}
+		while (_strcmp(*dets->tokens, "env") == 0)
+		{
+			printf("%s=%s\n", dets->envt->key, dets->envt->value);
+			dets->envt = dets->envt->next_node;
 		}
 		free(dets->line);
 		dets->line = NULL;
