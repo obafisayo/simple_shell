@@ -29,6 +29,5 @@ int exec(dets_t *dets);
 int _exec(dets_t *dets);
 void _sigint(int signal);
 char *get_path(dets_t *dets, list_t *path);
-void free_word_arr(char **words_arr);
 
 #endif /* _HSH_H_*/
