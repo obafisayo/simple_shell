@@ -57,6 +57,9 @@ int free_dets(dets_t *dets)
 	dets->line = _getline(-1);
 	free(dets->cwd);
 	dets->cwd = NULL;
+	free(dets->exe);
+	dets->exe = NULL;
 	free_dict((dict_t **)&dets->envt);
+	free_list(&dets->path);
 	return (dets->status);
 }
