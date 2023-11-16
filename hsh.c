@@ -4,7 +4,6 @@
  * main - This is the main entry point
  * @argc: This is the argument count
  * @argv: This is the argument vector
- * 
  * Return: Always 0
 */
 

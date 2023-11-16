@@ -117,7 +117,7 @@ dict_t *dict_del_node(dict_t **headptr, const char *key)
 */
 void free_dict(dict_t **headptr)
 {
-	if(!*headptr)
+	if (!*headptr)
 		return;
 	free_dict(&((*headptr)->next_node));
 	free((*headptr)->key);
