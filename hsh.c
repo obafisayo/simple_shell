@@ -10,6 +10,8 @@
 
 int main(int argc, char **argv)
 {
+	int i;
+
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
@@ -18,7 +20,10 @@ int main(int argc, char **argv)
 		parse_dets(dets);
 		while (dets->tokens)
 		{
-			exec(dets);
+			for (i = 0; dets->tokens[i] != NULL; i++)
+			{
+				printf("token[%d]: %s\n", i, dets->tokens[i]);
+			}
 			free_word_arr(dets->tokens);
 		}
 		free(dets->line);
