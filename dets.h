@@ -34,7 +34,7 @@ struct dets
 	char **argv;
 	int argc;
 	int from_terminal;
-	FILE *filenom;
+	int filenom;
 	int status;
 	char *file;
 	char *cwd;
