@@ -21,11 +21,11 @@ int main(int argc, char **argv)
 		printf("%s", dets->line);
 		while (dets->tokens)
 		{
-			for (i = 0; dets->tokens[i] != NULL; i++)
-			{
-				printf("token[%d]: %s", i, dets->tokens[i]);
+			for (i = 0; dets->tokens[i] != NULL; i++) {
+				printf("token[%d]: %s\n", i, dets->tokens[i]);
 			}
 			exec(dets);
+			free_tokens(&(dets->tokens));
 		}
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{
