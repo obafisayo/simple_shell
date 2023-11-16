@@ -21,9 +21,9 @@ int main(int argc, char **argv)
 		printf("%s", dets->line);
 		while (dets->tokens)
 		{
-			for (i = 0; tokens[i] != NULL; i++)
+			for (i = 0; dets->tokens[i] != NULL; i++)
 			{
-				printf("token[%d]: %s", i, tokens[i]);
+				printf("token[%d]: %s", i, dets->tokens[i]);
 			}
 			exec(dets);
 			free_tokens(&(dets->tokens));
