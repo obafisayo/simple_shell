@@ -8,7 +8,6 @@
 #include "envt.h"
 #include "err.h"
 #include "dets.h"
-#include "path.h"
 #include "string.h"
 #include "typedef.h"
 #include "ctype.h"
