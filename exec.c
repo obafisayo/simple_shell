@@ -8,7 +8,7 @@
 */
 int exec(dets_t *dets)
 {
-	int result
+	int result;
 
 	if (_strchr(*dets->tokens, '/'))
 	{
