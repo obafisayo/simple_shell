@@ -50,7 +50,7 @@ int free_dets(dets_t *dets)
 {
 	free(dets->line);
 	dets->line = _getline(-1);
-	free_word_arr(&dets->tokens);
+	free_word_arr(dets->tokens);
 	free(dets->exe);
 	dets->exe = NULL;
 	free(dets->cwd);
