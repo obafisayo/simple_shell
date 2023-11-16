@@ -22,8 +22,8 @@ int exec(dets_t *dets)
 	{
 		printf("this is the exec %s\n\n", dets->exe);
 		return (_exec(dets));
-	}i
-	f (dets->exe)
+	}
+	if (dets->exe)
 	{
 		perrorl_default(*dets->argv, dets->linenom, "Permission denied",
 				*dets->tokens, NULL);
