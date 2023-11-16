@@ -43,8 +43,6 @@ bool read_dets(dets_t *dets)
 		line = strjoin(NULL, "",line, temp);
 		old_pos += backslash_pos + 1;
 	}
-	free(temp);
-	free(line);
 	dets->line = line;
 	return (true);
 }

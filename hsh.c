@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 		{
 			printf("%s", dets->line);
 		}
+		free_tokens(&(dets->tokens));
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{
 			printf("%s=%s\n", dets->envt->key, dets->envt->value);
