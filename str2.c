@@ -89,3 +89,20 @@ char **split_string(const char *string, const char *delimiter)
 
     return words_arr;
 }
+
+/**
+ * free_string_array - Free the memory allocated for an array of strings
+ * @array: The array of strings to be freed
+ */
+void free_string_array(char **array)
+{
+    if (array == NULL) {
+        return;
+    }
+
+    for (size_t i = 0; array[i] != NULL; i++) {
+        free(array[i]);
+    }
+
+    free(array);
+}
