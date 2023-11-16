@@ -12,9 +12,12 @@ int parse_dets(dets_t *dets)
 	size_t n_tokens;
 
 	tokens = split_string(dets->line, delim);
-	for (n_tokens = 0; tokens[n_tokens] != NULL; n_tokens++)
-		;
 	dets->tokens = tokens;
+	for (n_tokens = 0; tokens[n_tokens] != NULL; n_tokens++)
+	{
+		free(tokens[n_tokens]);
+	}
+	free(tokens);
 	return (n_tokens);
 }
 

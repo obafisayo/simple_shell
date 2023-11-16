@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 		parse_dets(dets);
 		while (dets->tokens)
 		{
-			process(dets);
+			printf
 		}
 		free(dets->line);
 		dets->line = NULL;
