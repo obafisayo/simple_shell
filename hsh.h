@@ -11,6 +11,7 @@
 #include <signal.h>
 #include <stdio.h>
 
+#include "builtin.h"
 #include "typedef.h"
 #include "dict.h"
 #include "envt.h"
@@ -23,11 +24,9 @@
 extern char **environ;
 
 bool read_dets(dets_t *dets);
-int parse_dets(dets_t *dets);
 void free_tokens(char ***tokens);
 int exec(dets_t *dets);
 int _exec(dets_t *dets);
 void _sigint(int signal);
-char *get_path(dets_t *dets, list_t *path);
 
 #endif /* _HSH_H_*/

@@ -7,6 +7,10 @@
 */
 int exec(dets_t *dets)
 {
+	const builtin_t *builtin = get_builtin(*dets->tokens);
+
+	if (builtin)
+		return (builtin->func(dets));
 	if (_strchr(*dets->tokens, '/') == -1)
 	{
 		free_list(&dets->path);

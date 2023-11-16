@@ -59,6 +59,7 @@ int free_dets(dets_t *dets)
 	free(dets->exe);
 	dets->exe = NULL;
 	free_dict((dict_t **)&dets->envt);
+	free_dict(&info->aliases);
 	free_list(&dets->path);
 	return (dets->status);
 }

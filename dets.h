@@ -10,6 +10,7 @@
 #include "string.h"
 #include "err.h"
 #include "getline.h"
+#include "alias.h"
 
 extern char **environ;
 
@@ -29,6 +30,7 @@ extern char **environ;
  * @my_pid: stores the current pid value
  * @envt: stores a duplicate of the environ string
  * @path: stores the path value
+ * @aliases: stores the created alias
 */
 struct dets
 {
@@ -46,9 +48,13 @@ struct dets
 	pid_t my_pid;
 	envt_t *envt;
 	list_t *path;
+	alias_t *aliases;
 };
 
 dets_t *init_dets(int argc, char **argv);
 int free_dets(dets_t *dets);
+char **arrdup(char **arr);
+char *get_path(dets_t *dets, list_t *path);
+char **arrjoin(char **arr1, char **arr2);
 
 #endif /* _DETS_H_*/
