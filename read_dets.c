@@ -45,6 +45,5 @@ bool read_dets(dets_t *dets)
 		old_pos += backslash_pos + 1;
 	}
 	dets->line = line;
-	free(line);
 	return (true);
 }
