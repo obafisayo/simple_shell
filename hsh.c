@@ -15,10 +15,10 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		while ((dets->tokens = split_string(dets->line, " ")))
+		parse_dets(dets);
+		while (dets->tokens)
 		{
-			printf("%s", dets->line);
-			free_tokens(&(dets->tokens));
+			exec(dets);
 		}
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{
