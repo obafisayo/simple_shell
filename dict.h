@@ -19,7 +19,7 @@ struct dict
 	struct dict *next_node;
 };
 
-dict_t *dict_add_node_end(dict_t **headptr,	\
+dict_t *dict_add_node_end(dict_t **headptr,
 const char *key, const char *value);
 dict_t *dict_get_node(dict_t *head, const char *key);
 char *dict_get_value(dict_t *head, const char *key);
