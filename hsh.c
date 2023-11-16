@@ -11,6 +11,7 @@
 int main(int argc, char **argv)
 {
 	int i;
+	char *nu = NULL;
 
 	dets_t *dets = init_dets(argc, argv);
 
@@ -21,9 +22,20 @@ int main(int argc, char **argv)
 		printf("%s", dets->line);
 		while (dets->tokens)
 		{
-			for (i = 0; dets->tokens[i] != NULL; i++) {
+			for (i = 0; dets->tokens[i] != NULL; i++)
+			{
 				printf("token[%d]: %s\n", i, dets->tokens[i]);
 			}
+			size_t newSize = sizeof(char *) * (i + 1);
+			dets->tokens = realloc(dets->tokens, newSize);
+
+			if (dets->tokens == NULL)
+			{
+				perror("Error reallocating memory");
+				exit(EXIT_FAILURE);
+			}
+
+			dets->tokens[i] = NULL;
 			exec(dets);
 			free_tokens(&(dets->tokens));
 		}
