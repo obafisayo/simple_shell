@@ -23,8 +23,6 @@ int main(int argc, char **argv)
 			dets->tokens = NULL;
 		}
 	}
-	if (dets->from_terminal)
-		write(STDOUT_FILENO, "\n", 1);
 	if (dets->file)
 		close(dets->filenom);
 	exit(free_dets(dets));
