@@ -22,10 +22,11 @@ int main(int argc, char **argv)
 		{
 			printf("token[%d]: %s\n", i, dets->tokens[i]);
 		}
-		
 		free_string_array(dets->tokens);
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);
+	if (dets->file)
+		close(dets->filenom);
 	exit(free_dets(dets));
 }
