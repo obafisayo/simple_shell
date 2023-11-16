@@ -8,8 +8,6 @@
 */
 int exec(dets_t *dets)
 {
-	int result;
-
 	if (_strchr(*dets->tokens, '/'))
 	{
 		dets->exe = _strdup(*dets->tokens);
@@ -20,19 +18,21 @@ int exec(dets_t *dets)
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		dets->exe = get_path(dets, dets->path);
 	}
-
-	if (!dets->exe || access(dets->exe, X_OK) != 0)
+	if (dets->exe && access(dets->exe, X_OK) == 0)
+		return (_exec(dets));
+	if (dets->exe)
 	{
-		perrorl_default(*dets->argv, dets->linenom, (dets->exe ? "Permission denied" : "Not found"), *dets->tokens, NULL);
-		dets->status = (dets->exe ? 126 : 127);
-		free(dets->exe);
-		return dets->status;
+		perrorl_default(*dets->argv, dets->linenom, "Permission denied",
+				*dets->tokens, NULL);
+		dets->status = 126;
 	}
-
-	result = _exec(dets);
-	free(dets->exe);
-	dets->exe = NULL;
-	return result;
+	else
+	{
+		perrorl_default(*dets->argv, dets->linenom, "not found",
+				*dets->tokens, NULL);
+		dets->status = 127;
+	}
+	return (dets->status);
 }
 
 /**
