@@ -48,11 +48,8 @@ dets_t *init_dets(int argc, char **argv)
  */
 int free_dets(dets_t *dets)
 {
-	if (dets->tokens != NULL)
-	{
-		free_string_array(dets->tokens);
-		dets->tokens = NULL;
-	}
+	free_string_array(dets->tokens);
+	dets->tokens = NULL;
 	free(dets->line);
 	free(dets->cwd);
 	dets->cwd = NULL;

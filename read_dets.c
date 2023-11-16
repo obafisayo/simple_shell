@@ -26,7 +26,6 @@ bool read_dets(dets_t *dets)
 			write(STDOUT_FILENO, "> ", 2);
 		}
 		dets->linenom += 1;
-
 		line[_strlen(line) - 2] = '\0';
 		temp = line;
 		newline = _getline(dets->filenom);
@@ -39,9 +38,12 @@ bool read_dets(dets_t *dets)
 		old_pos -= 1;
 		line[old_pos + backslash_pos] = '\0';
 		temp += backslash_pos + 1;
-		line = strjoin(NULL, "", line, temp);
+		newline = strjoin(NULL, "", line, temp);
+		line = newline;
 		old_pos += backslash_pos + 1;
 	}
 	dets->line = line;
+	if (newline != NULL && (backslash_pos = _strchr(temp, '\\')) != -1)
+		free(newline);
 	return (true);
 }
