@@ -10,8 +10,6 @@
 
 int main(int argc, char **argv)
 {
-	int i;
-
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
