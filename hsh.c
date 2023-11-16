@@ -11,7 +11,6 @@
 int main(int argc, char **argv)
 {
 	int i;
-	char *nu = NULL;
 
 	dets_t *dets = init_dets(argc, argv);
 
