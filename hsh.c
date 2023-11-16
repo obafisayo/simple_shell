@@ -15,14 +15,12 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		while ((dets->tokens = split_string(dets->line, " ")))
+		dets->tokens = split_string(dets->line, " ");
+		exec(dets);
+		if (dets->tokens != NULL)
 		{
-			exec(dets);
-			if (dets->tokens != NULL)
-			{
-				free_string_array(dets->tokens);
-				dets->tokens = NULL;
-			}
+			free_string_array(dets->tokens);
+			dets->tokens = NULL;
 		}
 	}
 	if (dets->from_terminal)
