@@ -20,7 +20,7 @@ int exec(dets_t *dets)
 	}
 	if (dets->exe && access(dets->exe, X_OK) == 0)
 	{
-		printf(dets->exe)
+		printf("this is the exec %s\n\n", dets->exe);
 		return (_exec(dets));
 	}i
 	f (dets->exe)
