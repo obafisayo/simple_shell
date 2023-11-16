@@ -26,7 +26,6 @@ int main(int argc, char **argv)
 				printf("token[%d]: %s", i, dets->tokens[i]);
 			}
 			exec(dets);
-			free_tokens(&(dets->tokens));
 		}
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{
