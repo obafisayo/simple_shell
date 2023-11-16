@@ -19,8 +19,8 @@ char **split_string(const char *string, const char *delimiter)
 
     t = 0;
     str = _strdup(string);
-    token = _strtok(str, delim);
-    for (; token != NULL; token = _strtok(NULL, delim))
+    token = strtok(str, delim);
+    for (; token != NULL; token = strtok(NULL, delim))
     {
         t++;
     }
@@ -35,8 +35,8 @@ char **split_string(const char *string, const char *delimiter)
 
     i = 0;
     str = _strdup(string);
-    token = _strtok(str, delim);
-    for (; token != NULL; token = _strtok(NULL, delim))
+    token = strtok(str, delim);
+    for (; token != NULL; token = strtok(NULL, delim))
     {
         len = _strlen(token);
         if (len > 0 && token[len - 1] == '\n')
