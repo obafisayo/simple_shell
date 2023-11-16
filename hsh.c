@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 		while (dets->tokens)
 		{
 			exec(dets);
-			free_tokens(&(dets->tokens));
+			free_word_arr(dets->tokens);
 		}
 		while (_strcmp(*dets->tokens, "env") == 0)
 		{

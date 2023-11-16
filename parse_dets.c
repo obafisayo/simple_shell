@@ -42,3 +42,20 @@ void free_tokens(char ***tokens)
 
 	*tokens = NULL;
 }
+
+/**
+ * free_word_arr - Frees memory allocated for an array of words.
+ * @words_arr: The array of words.
+ */
+void free_word_arr(char **words_arr)
+{
+    if (words_arr == NULL)
+        return;
+
+    for (int i = 0; words_arr[i] != NULL; i++)
+    {
+        free(words_arr[i]);
+    }
+
+    free(words_arr);
+}

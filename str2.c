@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "string.h"
-#include <string.h>
+#include <unistd.h>
 
 /**
  * _strtok - This function works the same way as the _strtok function.
  * @str: This is the string to be tokenized
  * @delim: This is the delimiter
  * Return: returns a pointer to the next token, or NULL if there are no more tokens.
-*/
+ */
 char *_strtok(char *str, const char *delim)
 {
 	static char *lastToken = NULL;
@@ -23,7 +24,7 @@ char *_strtok(char *str, const char *delim)
 		return (NULL);
 	}
 	tokenStart = str;
-	while (*str != '0' && _strchr(delim, *str) == -1)
+	while (*str != '\0' && _strchr(delim, *str) == -1)
 		str++;
 	if (*str != '\0')
 	{
@@ -37,10 +38,10 @@ char *_strtok(char *str, const char *delim)
 }
 
 /**
- * split_string - This is used to split the  stings passed into it.
- * It retuns an array of each wordsd
+ * split_string - This is used to split the stings passed into it.
+ * It returns an array of each word.
  * @string: This is the string to be parsed
- * @delim: This is delimiter to parse the string
+ * @delim: This is the delimiter to parse the string
  * Return: This returns an array of words
  */
 char **split_string(const char *string, const char *delim)
@@ -57,6 +58,7 @@ char **split_string(const char *string, const char *delim)
 		t++;
 	}
 	free(str);
+
 	words_arr = (char **)malloc((t + 1) * sizeof(char *));
 	if (words_arr == NULL)
 	{
@@ -78,5 +80,10 @@ char **split_string(const char *string, const char *delim)
 	}
 	words_arr[i] = NULL;
 	free(str);
-	return (words_arr);
+	for (int j = 0; j < i; j++)
+	{
+		free(words_arr[j]);
+	}
+
+	return words_arr;
 }
