@@ -36,14 +36,14 @@ int __exec(dets_t *dets)
 		perrorl_default(*dets->argv, dets->linenom, "Not found",
 				*dets->tokens, *args, NULL);
 		free(exe);
-		free_string_array(&args);
-		free_string_array(&env);
+		free_string_array(args);
+		free_string_array(env);
 		exit(127);
 	}
 	perrorl_default(*dets->argv, dets->linenom, "Permission denied",
 			*dets->tokens, *args, NULL);
 	free(exe);
-	free_string_array(&args);
+	free_string_array(args);
 	free_dets(dets);
 	exit(126);
 }
