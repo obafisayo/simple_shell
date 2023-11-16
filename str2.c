@@ -38,7 +38,7 @@ char **split_string(const char *string, const char *delimiter)
     token = strtok(str, delim);
     for (; token != NULL; token = strtok(NULL, delim))
     {
-        len = _strlen(token);
+        len = strlen(token);
         if (len > 0 && token[len - 1] == '\n')
         {
             token[len - 1] = '\0';
