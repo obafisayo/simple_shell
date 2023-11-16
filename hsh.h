@@ -29,5 +29,8 @@ int exec(dets_t *dets);
 int _exec(dets_t *dets);
 void _sigint(int signal);
 char *get_path(dets_t *dets, list_t *path);
+int execute_file(char **args, struct stat *st, char **environ, char **argv);
+bool check_file_status(char *pathname, struct stat *st, char **argv);
+void process(dets_t *dets);
 
 #endif /* _HSH_H_*/

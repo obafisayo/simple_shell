@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 {
 	int i;
 	size_t newSize;
+	struct stat st;
 
 	dets_t *dets = init_dets(argc, argv);
 
@@ -21,24 +22,8 @@ int main(int argc, char **argv)
 		parse_dets(dets);
 		while (dets->tokens)
 		{
-			for (i = 0; dets->tokens[i] != NULL; i++)
-				;
-			newSize = sizeof(char *) * (i + 1);
-			dets->tokens = malloc(sizeof(newSize));
-			if (dets->tokens == NULL)
-			{
-				perror("Error reallocating memory");
-				exit(EXIT_FAILURE);
-			}
-			dets->tokens[i] = "NULL";
-			printf("token[%d]: %s\n", i, dets->tokens[i]);
-			exec(dets);
+			process(dets);
 			free_tokens(&(dets->tokens));
-		}
-		while (_strcmp(*dets->tokens, "env") == 0)
-		{
-			printf("%s=%s\n", dets->envt->key, dets->envt->value);
-			dets->envt = dets->envt->next_node;
 		}
 		free(dets->line);
 		dets->line = NULL;
