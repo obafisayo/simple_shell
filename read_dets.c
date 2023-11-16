@@ -8,7 +8,7 @@
 */
 bool read_dets(dets_t *dets)
 {
-	char *temp = NULL, *line = NULL;
+	char *temp = NULL, *line = NULL, *newline = NULL;
 	ssize_t backslash_pos, old_pos = 1;
 	
 	if (dets->from_terminal)
@@ -31,7 +31,9 @@ bool read_dets(dets_t *dets)
 
 		line[_strlen(line) - 2] = '\0';
 		temp = line;
-		line = strjoin(NULL, "", temp, _getline(dets->filenom));
+		newline = _getline(dets->filenom);
+		line = strjoin(NULL, "", temp, newline);
+		free(newline);
 	}
 	temp = line;
 	while ((backslash_pos = _strchr(temp, '\\')) != -1)
@@ -43,5 +45,6 @@ bool read_dets(dets_t *dets)
 		old_pos += backslash_pos + 1;
 	}
 	dets->line = line;
+	free(line);
 	return (true);
 }
