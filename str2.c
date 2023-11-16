@@ -16,7 +16,7 @@ char *_strtok(char *str, const char *delim)
 
     if (str == NULL)
         str = lastToken;
-    while (*str != '\0' && _strchr(delim, *str) != -1)
+    while (*str != '\0' && _strchr(delim, *str) == -1)
         str++;
     if (*str == '\0')
     {
@@ -24,7 +24,7 @@ char *_strtok(char *str, const char *delim)
         return (NULL);
     }
     tokenStart = str;
-    while (*str != '0' && _strchr(delim, *str) == -1)
+    while (*str != '\0' && _strchr(delim, *str) == -1)
         str++;
     if (*str != '\0')
     {
@@ -47,7 +47,7 @@ char **split_string(const char *string, const char *delimiter)
 {
     int i, t;
     size_t len;
-    char *str, *token, *ntok;
+    char *str, *token;
     char **words_arr;
     const char *delim = delimiter;
 
@@ -56,15 +56,15 @@ char **split_string(const char *string, const char *delimiter)
     token = _strtok(str, delim);
     for (; token != NULL; token = _strtok(NULL, delim))
     {
-        t++;
+    t++;
     }
     free(str);
-    free(token);
+
     words_arr = (char **)malloc((t + 1) * sizeof(char *));
     if (words_arr == NULL)
     {
-        write(STDERR_FILENO, "Memory allocation failed", 25);
-        exit(1);
+    perror("Memory allocation failed");
+    exit(EXIT_FAILURE);
     }
 
     i = 0;
@@ -72,37 +72,20 @@ char **split_string(const char *string, const char *delimiter)
     token = _strtok(str, delim);
     for (; token != NULL; token = _strtok(NULL, delim))
     {
-        len = _strlen(token);
-        if (len > 0 && token[len - 1] == '\n')
-        {
-            token[len - 1] = '\0';
-        }
-        ntok = _strdup(token);
-        words_arr[i] = ntok;
-        free(ntok);
-        i++;
+    len = _strlen(token);
+    if (len > 0 && token[len - 1] == '\n')
+    {
+        token[len - 1] = '\0';
+    }
+    words_arr[i++] = _strdup(token);
+    if (words_arr[i - 1] == NULL)
+    {
+        perror("Memory allocation failed");
+        exit(EXIT_FAILURE);
+    }
     }
     words_arr[i] = NULL;
     free(str);
-    free(token);
 
     return words_arr;
-}
-
-
-/**
- * free_string_array - Free the memory allocated for an array of strings
- * @array: The array of strings to be freed
- */
-void free_string_array(char **array)
-{
-    if (array == NULL) {
-        return;
-    }
-
-    for (size_t i = 0; array[i] != NULL; i++) {
-        free(array[i]);
-    }
-
-    free(array);
 }
