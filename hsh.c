@@ -10,6 +10,8 @@
 
 int main(int argc, char **argv)
 {
+	int i;
+
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
@@ -19,6 +21,10 @@ int main(int argc, char **argv)
 		printf("%s", dets->line);
 		while (dets->tokens)
 		{
+			for (i = 0; tokens[i] != NULL; i++)
+			{
+				printf("token[%d]: %s", i, tokens[i]);
+			}
 			exec(dets);
 			free_tokens(&(dets->tokens));
 		}
