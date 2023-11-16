@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 			for (i = 0; dets->tokens[i] != NULL; i++)
 				;
 			newSize = sizeof(char *) * (i + 1);
-			dets->tokens = malloc(dets->tokens, newSize);
+			dets->tokens = malloc(sizeof(newSize));
 			if (dets->tokens == NULL)
 			{
 				perror("Error reallocating memory");
