@@ -18,22 +18,17 @@ int main(int argc, char **argv)
 	while (read_dets(dets))
 	{
 		parse_dets(dets);
-		printf("%s", dets->line);
 		while (dets->tokens)
 		{
 			for (i = 0; dets->tokens[i] != NULL; i++)
-			{
-				printf("token[%d]: %s\n", i, dets->tokens[i]);
-			}
+				;
 			size_t newSize = sizeof(char *) * (i + 1);
 			dets->tokens = realloc(dets->tokens, newSize);
-
 			if (dets->tokens == NULL)
 			{
 				perror("Error reallocating memory");
 				exit(EXIT_FAILURE);
 			}
-
 			dets->tokens[i] = "NULL";
 			printf("token[%d]: %s\n", i, dets->tokens[i]);
 			exec(dets);
