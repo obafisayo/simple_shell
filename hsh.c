@@ -17,11 +17,6 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		dets->tokens = split_string(dets->line, " ");
-		for (i = 0; dets->tokens[i] != NULL; i++)
-		{
-			printf("token[%d]: %s\n", i, dets->tokens[i]);
-		}
 		exec(dets);
 		if (dets->tokens != NULL)
 		{
