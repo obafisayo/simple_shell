@@ -5,86 +5,76 @@
 #include <string.h>
 
 /**
- * _strtok - This function works the same way as the _strtok function.
- * @str: This is the string to be tokenized
- * @delim: This is the delimiter
- * Return: returns a pointer to the next token, or NULL if there are no more tokens.
+ * split_string - Split a string into an array of strings based on a delimiter
+ * @string: The input string to be split
+ * @delimiter: The character used as a delimiter for splitting
+ * Return: An array of strings or NULL if memory allocation fails
  */
-char *_strtok(char *str, const char *delim)
+char **split_string(const char *string, char delimiter)
 {
-	static char *lastToken = NULL;
-	char *tokenStart;
+    char **result = NULL;
+    size_t count = 0;
+    const char *temp = string;
+    const char *delimiter_ptr = NULL;
 
-	if (str == NULL)
-		str = lastToken;
-	while (*str != '\0' && _strchr(delim, *str) != -1)
-		str++;
-	if (*str == '\0')
-	{
-		lastToken = NULL;
-		return (NULL);
-	}
-	tokenStart = str;
-	while (*str != '\0' && _strchr(delim, *str) == -1)
-		str++;
-	if (*str != '\0')
-	{
-		*str = '\0';
-		str++;
-		lastToken = str;
-	}
-	else
-		lastToken = NULL;
-	return tokenStart;
+    while (*temp) {
+        if (*temp == delimiter) {
+            count++;
+        }
+        temp++;
+    }
+    count++;
+
+    result = (char **)malloc((count + 1) * sizeof(char *));
+    if (result == NULL) {
+        return NULL;
+    }
+
+    size_t i = 0;
+    temp = string;
+
+    while ((delimiter_ptr = strchr(temp, delimiter)) != NULL) {
+        size_t length = delimiter_ptr - temp;
+        result[i] = (char *)malloc((length + 1) * sizeof(char));
+        if (result[i] == NULL) {
+            while (i > 0) {
+                free(result[--i]);
+            }
+            free(result);
+            return NULL;
+        }
+        strncpy(result[i], temp, length);
+        result[i][length] = '\0';
+        temp = delimiter_ptr + 1;
+        i++;
+    }
+
+    result[i] = strdup(temp);
+    if (result[i] == NULL) {
+        while (i > 0) {
+            free(result[--i]);
+        }
+        free(result);
+        return NULL;
+    }
+
+    result[count] = NULL;
+    return result;
 }
 
 /**
- * split_string - This is used to split the stings passed into it.
- * It returns an array of each word.
- * @string: This is the string to be parsed
- * @delim: This is the delimiter to parse the string
- * Return: This returns an array of words
+ * free_string_array - Free the memory allocated for an array of strings
+ * @array: The array of strings to be freed
  */
-char **split_string(const char *string, const char *delim)
+void free_string_array(char **array)
 {
-	int i, t = 0;
-	size_t len;
-	char *str, *token;
-	char **words_arr;
+    if (array == NULL) {
+        return;
+    }
 
-	str = _strdup(string);
-	token = strtok(str, delim);
-	for (; token != NULL; token = strtok(NULL, delim))
-	{
-		t++;
-	}
-	free(str);
+    for (size_t i = 0; array[i] != NULL; i++) {
+        free(array[i]);
+    }
 
-	words_arr = (char **)malloc((t + 1) * sizeof(char *));
-	if (words_arr == NULL)
-	{
-		write(STDERR_FILENO, "Memory allocation failed", 25);
-		exit(1);
-	}
-	i = 0;
-	str = _strdup(string);
-	token = strtok(str, delim);
-	for (; token != NULL; token = strtok(NULL, delim))
-	{
-		len = _strlen(token);
-		if (len > 0 && token[len - 1] == '\n')
-		{
-			token[len - 1] = '\0';
-		}
-		words_arr[i] = _strdup(token);
-		i++;
-	}
-	words_arr[i] = NULL;
-	free(str);
-	for (int j = 0; j < i; j++)
-	{
-		free(words_arr[j]);
-	}
-
-	return words_arr;
+    free(array);
 }
