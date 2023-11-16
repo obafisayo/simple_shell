@@ -8,6 +8,7 @@
 */
 int exec(dets_t *dets)
 {
+	{
 	if (_strchr(*dets->tokens, '/'))
 	{
 		dets->exe = _strdup(*dets->tokens);
@@ -18,24 +19,30 @@ int exec(dets_t *dets)
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		dets->exe = get_path(dets, dets->path);
 	}
+
 	if (dets->exe && access(dets->exe, X_OK) == 0)
 	{
 		printf("this is the exec %s\n\n", dets->exe);
-		return (_exec(dets));
+		return _exec(dets);
 	}
+
 	if (dets->exe)
 	{
 		perrorl_default(*dets->argv, dets->linenom, "Permission denied",
-				*dets->tokens, NULL);
+					*dets->tokens, NULL);
 		dets->status = 126;
 	}
 	else
 	{
 		perrorl_default(*dets->argv, dets->linenom, "not found",
-				*dets->tokens, NULL);
+					*dets->tokens, NULL);
 		dets->status = 127;
 	}
-	return (dets->status);
+
+	free(dets->exe);
+	dets->exe = NULL;
+
+	return dets->status;
 }
 
 /**
@@ -54,9 +61,7 @@ int _exec(dets_t *dets)
 		av = dets->tokens;
 		envt = dict_to_envt(dets->envt);
 
-		dets->exe = NULL;
-		dets->tokens = NULL;
-		free_dets(dets);
+		free(exec);
 
 		execve(exec, av, envt);
 		perror(*av);
@@ -64,7 +69,6 @@ int _exec(dets_t *dets)
 		if (dets->file)
 			close(dets->filenom);
 
-		free(exec);
 		free_tokens(&av);
 		free_tokens(&envt);
 		exit(EXIT_FAILURE);
@@ -80,6 +84,7 @@ int _exec(dets_t *dets)
 		dets->status = WEXITSTATUS(dets->status);
 		break;
 	}
+
 	free(dets->exe);
 	dets->exe = NULL;
 
