@@ -15,7 +15,7 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		while (dets->tokens = split_string(dets->line, " "))
+		while ((dets->tokens = split_string(dets->line, " ")))
 		{
 			exec(dets);
 		}
