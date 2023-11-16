@@ -8,7 +8,7 @@
 */
 bool read_dets(dets_t *dets)
 {
-	char *temp, *line;
+	char *temp = NULL, *line = NULL;
 	ssize_t backslash_pos, old_pos = 1;
 	
 	if (dets->from_terminal)

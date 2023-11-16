@@ -21,11 +21,6 @@ int main(int argc, char **argv)
 			exec(dets);
 			free_word_arr(dets->tokens);
 		}
-		while (_strcmp(*dets->tokens, "env") == 0)
-		{
-			printf("%s=%s\n", dets->envt->key, dets->envt->value);
-			dets->envt = dets->envt->next_node;
-		}
 		free(dets->line);
 		dets->line = NULL;
 	}

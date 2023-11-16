@@ -8,18 +8,20 @@
 */
 int exec(dets_t *dets)
 {
-	if (_strchr(*dets->tokens, '/'))
-	{
-		dets->exe = _strdup(*dets->tokens);
-	}
-	else
+	if (_strchr(**dets->tokens, '/') == -1)
 	{
 		free_list(&dets->path);
 		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
 		dets->exe = get_path(dets, dets->path);
 	}
+	else
+	{
+		dets->exe = _strdup(*dets->tokens);
+	}
 	if (dets->exe && access(dets->exe, X_OK) == 0)
+	{
 		return (_exec(dets));
+	}
 	if (dets->exe)
 	{
 		perrorl_default(*dets->argv, dets->linenom, "Permission denied",
@@ -43,7 +45,7 @@ int exec(dets_t *dets)
 int _exec(dets_t *dets)
 {
 	char *exec, **av, **envt;
-	
+
 	switch (fork())
 	{
 	case 0:

@@ -8,33 +8,41 @@
 envt_t *envt_to_dict(char **env)
 {
 	envt_t *head = NULL;
-	envt_t *tail = NULL;
 
-	while (*env) {
-		char *env_str = _strdup(*env);
-		if (!env_str) {
-			free_dict(&head);
-			return NULL;
-		}
+	if (!_envt_to_dict(&head, env))
+		free_dict(&head);
+	
+	return (head);
+}
 
-		ssize_t key_len = _strchr(*env, '=');
-		if (key_len == -1) {
-			free(env_str);
-			free_dict(&head);
-			return NULL;
-		}
+/**
+ * _env_to_dict - turn the environment into a linked list (helper)
+ * @tailptr: pointer to the tail of the list
+ * @env: environment
+ *
+ * Return: pointer to the tail of the list
+ */
+envt_t *_envt_to_dict(envt_t **tailptr, char **env)
+{
+	envt_t *tail;
+	char *env_str;
+	ssize_t key_len;
 
-		env_str[key_len] = '\0';
-		tail = dict_add_node_end(&head, env_str, env_str + key_len + 1);
-		free(env_str);
+	if (!*env)
+		return (*tailptr);
+	
+	env_str = _strdup(*env);
+	if (!env_str)
+		return (NULL);
+	
+	key_len = _strchr(*env, '=');
 
-		if (!tail) {
-			free_dict(&head);
-			return NULL;
-		}
+	if (key_len == -1)
+		return (NULL);
+	
+	env_str[key_len] = '\0';
+	tail = dict_add_node_end(tailptr, env_str, env_str + key_len + 1);
+	free(env_str);
 
-		env++;
-	}
-
-	return head;
+	return (_env_to_dict(&tail, env + 1));
 }

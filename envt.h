@@ -11,6 +11,7 @@
 typedef dict_t envt_t;
 
 envt_t *envt_to_dict(char **env);
+envt_t *_envt_to_dict(envt_t **tailptr, char **env);
 char **dict_to_envt(envt_t *head);
 
 #endif /* _ENVT_H_ */
