@@ -22,7 +22,12 @@ int main(int argc, char **argv)
 		{
 			printf("token[%d]: %s\n", i, dets->tokens[i]);
 		}
-		free_string_array(dets->tokens);
+		exec(dets);
+		if (dets->tokens != NULL)
+		{
+			free_string_array(dets->tokens);
+			dets->tokens = NULL;
+		}
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);

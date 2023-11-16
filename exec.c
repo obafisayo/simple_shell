@@ -64,8 +64,8 @@ int _exec(dets_t *dets)
 			close(dets->filenom);
 		
 		free(exec);
-		free_tokens(&av);
-		free_tokens(&envt);
+		free_string_array(&av);
+		free_string_array(&envt);
 		exit(EXIT_FAILURE);
 		break;
 
