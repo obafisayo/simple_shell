@@ -35,6 +35,10 @@ int main(int argc, char **argv)
 			}
 
 			dets->tokens[i] = NULL;
+			for (i = 0; dets->tokens[i] != NULL; i++)
+			{
+				printf("token[%d]: %s\n", i, dets->tokens[i]);
+			}
 			exec(dets);
 			free_tokens(&(dets->tokens));
 		}
