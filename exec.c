@@ -12,7 +12,7 @@ int exec(dets_t *dets)
 	{
 		printf("/ detected ");
 		free_list(&dets->path);
-		dets->path = str_to_list(dict_get_value(dets->envt, "PATH"), ':');
+		dets->path = str_to_list(getenv("PATH")), ':');
 		dets->exe = get_path(dets, dets->path);
 		printf("dets->exe path found = %s", dets->exe);
 	}
