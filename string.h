@@ -31,7 +31,7 @@ char *strjoin(size_t *n, const char *sep, const char *pre, const char *suf);
 char *strjoina(size_t *n, const char *sep, const char **array);
 char *strjoinl(size_t *n, const char *sep, ...);
 
-char **split_string(const char *string, char delimiter);
+char **split_string(const char *string, const char* delimiter);
 void free_string_array(char **array);
 
 unsigned int atou(char *s);
