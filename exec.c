@@ -43,13 +43,24 @@ int exec(dets_t *dets)
 int _exec(dets_t *dets)
 {
 	char *exec, **av, **envt;
+
 	switch (fork())
 	{
 	case 0:
 		exec = dets->exe;
 		av = dets->tokens;
 		envt = dict_to_envt(dets->envt);
-
+		printf("thisis exec%s\n\n", exec);
+		while (*av)
+		{
+			printf("thi si av%s\n", *av);
+			av++;
+		}
+		while (*envt)
+                {
+                        printf("thisi is envt%s\n", *envt);
+                        envt++;
+                }
 		dets->exe = NULL;
 		dets->tokens = NULL;
 		free_dets(dets);
