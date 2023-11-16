@@ -4,40 +4,6 @@
 #include "string.h"
 
 /**
- * _strtok - This function works the same way as the strtok function.
- * @str: This is the string to be tokenized
- * @delim: This is the delimiter
- * Return: returns a pointer to the next token, or NULL if there are no more tokens.
-*/
-char *_strtok(char *str, const char *delim)
-{
-    static char *lastToken = NULL;
-    char *tokenStart;
-
-    if (str == NULL)
-        str = lastToken;
-    while (*str != '\0' && _strchr(delim, *str) == -1)
-        str++;
-    if (*str == '\0')
-    {
-        lastToken = NULL;
-        return (NULL);
-    }
-    tokenStart = str;
-    while (*str != '\0' && _strchr(delim, *str) == -1)
-        str++;
-    if (*str != '\0')
-    {
-        *str = '\0';
-        str++;
-        lastToken = str;
-    }
-    else
-        lastToken = NULL;
-    return tokenStart;
-}
-
-/**
  * split_string - Split a string into an array of strings based on a delimiter string
  * @string: The input string to be split
  * @delimiter: The delimiter string used for splitting
@@ -56,15 +22,15 @@ char **split_string(const char *string, const char *delimiter)
     token = _strtok(str, delim);
     for (; token != NULL; token = _strtok(NULL, delim))
     {
-    t++;
+        t++;
     }
     free(str);
 
     words_arr = (char **)malloc((t + 1) * sizeof(char *));
     if (words_arr == NULL)
     {
-    perror("Memory allocation failed");
-    exit(EXIT_FAILURE);
+        write(STDERR_FILENO, "Memory allocation failed", 25);
+        exit(1);
     }
 
     i = 0;
@@ -72,23 +38,20 @@ char **split_string(const char *string, const char *delimiter)
     token = _strtok(str, delim);
     for (; token != NULL; token = _strtok(NULL, delim))
     {
-    len = _strlen(token);
-    if (len > 0 && token[len - 1] == '\n')
-    {
-        token[len - 1] = '\0';
-    }
-    words_arr[i++] = _strdup(token);
-    if (words_arr[i - 1] == NULL)
-    {
-        perror("Memory allocation failed");
-        exit(EXIT_FAILURE);
-    }
+        len = _strlen(token);
+        if (len > 0 && token[len - 1] == '\n')
+        {
+            token[len - 1] = '\0';
+        }
+        words_arr[i] = _strdup(token);
+        i++;
     }
     words_arr[i] = NULL;
     free(str);
 
     return words_arr;
 }
+
 
 /**
  * free_string_array - Free the memory allocated for an array of strings
