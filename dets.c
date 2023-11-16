@@ -2,6 +2,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
+#include <stdlib.h> // Add this for exit function
 
 #include "hsh.h"
 #include "dets.h"
@@ -11,7 +12,7 @@
  * @argc: This is the argument count
  * @argv: This is the argument vector
  * Return: This returns a pointer to the details
-*/
+ */
 
 dets_t *init_dets(int argc, char **argv)
 {
@@ -20,12 +21,13 @@ dets_t *init_dets(int argc, char **argv)
 
 	dets.argc = argc;
 	dets.argv = argv;
-	dets.filenom = STDIN_FILENO;
+	dets.filenom = stdin;
+
 	if (argc > 1)
 	{
 		dets.file = argv[1];
-		dets.filenom = fopen(dets.file, O_RDONLY);
-		if (dets.filenom == -1)
+		dets.filenom = fopen(dets.file, "r");
+		if (dets.filenom == NULL)
 		{
 			err = strjoin(NULL, " ", "Can't open", dets.file);
 			perrorl_default(*argv, dets.linenom, err, NULL);
@@ -34,11 +36,13 @@ dets_t *init_dets(int argc, char **argv)
 			exit(free_dets(&dets));
 		}
 	}
-	dets.from_terminal = isatty(dets.filenom);
+
+	dets.from_terminal = isatty(fileno(dets.filenom));
 	dets.my_pid = getpid();
 	dets.cwd = getcwd(NULL, 0);
 	dets.envt = envt_to_dict(environ);
-	return (&dets);
+
+	return &dets;
 }
 
 /**
@@ -53,5 +57,11 @@ int free_dets(dets_t *dets)
 	free(dets->cwd);
 	dets->cwd = NULL;
 	free_dict((dict_t **)&dets->envt);
-	return (dets->status);
+
+	if (dets->filenom != stdin)
+	{
+		fclose(dets->filenom);
+	}
+
+	return dets->status;
 }
