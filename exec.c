@@ -19,8 +19,11 @@ int exec(dets_t *dets)
 		dets->exe = get_path(dets, dets->path);
 	}
 	if (dets->exe && access(dets->exe, X_OK) == 0)
+	{
+		printf(dets->exe)
 		return (_exec(dets));
-	if (dets->exe)
+	}i
+	f (dets->exe)
 	{
 		perrorl_default(*dets->argv, dets->linenom, "Permission denied",
 				*dets->tokens, NULL);
@@ -53,7 +56,7 @@ int _exec(dets_t *dets)
 		printf("thisis exec%s\n\n", exec);
 		while (*av)
 		{
-			printf("thi si av%s\n", *av);
+			printf("this is av%s\n", *av);
 			av++;
 		}
 		while (*envt)
