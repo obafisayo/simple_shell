@@ -87,11 +87,12 @@ char **split_string(const char *string, const char *delim)
  */
 void free_string_array(char **array)
 {
-    if (array == NULL) {
-        return;
-    }
-    for (size_t i = 0; array[i] != NULL; i++) {
-        free(array[i]);
-    }
-    free(array);
+	size_t i;
+	if (array == NULL) {
+		return;
+	}
+	for (i = 0; array[i] != NULL; i++) {
+		free(array[i]);
+	}
+	free(array);
 }
