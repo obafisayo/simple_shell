@@ -16,7 +16,7 @@ char *_strtok(char *str, const char *delim)
 
     if (str == NULL)
         str = lastToken;
-    while (*str != '\0' && _strchr(delim, *str) != NULL)
+    while (*str != '\0' && _strchr(delim, *str) != -1)
         str++;
     if (*str == '\0')
     {
@@ -24,7 +24,7 @@ char *_strtok(char *str, const char *delim)
         return (NULL);
     }
     tokenStart = str;
-    while (*str != '0' && _strchr(delim, *str) == NULL)
+    while (*str != '0' && _strchr(delim, *str) == -1)
         str++;
     if (*str != '\0')
     {
