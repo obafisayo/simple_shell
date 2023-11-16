@@ -10,23 +10,19 @@
 
 int main(int argc, char **argv)
 {
-	int i;
-
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
 	while (read_dets(dets))
 	{
-		dets->tokens = split_string(dets->line, " ");
-		for (i = 0; dets->tokens[i] != NULL; i++)
+		while ((dets->tokens = split_string(dets->line, " ")))
 		{
-			printf("token[%d]: %s\n", i, dets->tokens[i]);
-		}
-		exec(dets);
-		if (dets->tokens != NULL)
-		{
-			free_string_array(dets->tokens);
-			dets->tokens = NULL;
+			exec(dets);
+			if (dets->tokens != NULL)
+			{
+				free_string_array(dets->tokens);
+				dets->tokens = NULL;
+			}
 		}
 	}
 	if (dets->from_terminal)
