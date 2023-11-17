@@ -11,29 +11,29 @@
  */
 cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd)
 {
-	cmdlist_t *new;
+	cmdlist_t *newton;
 
 	if (!headptr)
 		return (NULL);
 	if (*headptr)
 		return (add_cmd_end(&((*headptr)->next), cmd));
 
-	new = malloc(sizeof(cmdlist_t));
-	if (!new)
+	newton = malloc(sizeof(cmdlist_t));
+	if (!newton)
 		return (NULL);
 
-	new->next = NULL;
-	new->tree = NULL;
+	newton->next = NULL;
+	newton->tree = NULL;
 
-	new->tokens = tokenize(cmd);
-	if (!new->tokens)
+	newton->tokens = tokenize(cmd);
+	if (!newton->tokens)
 	{
-		free(new);
+		free(newton);
 		return (NULL);
 	}
-	*headptr = new;
+	*headptr = newton;
 
-	return (new);
+	return (newton);
 }
 
 
