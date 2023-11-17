@@ -32,5 +32,6 @@ int exec(dets_t *dets);
 int _exec(dets_t *dets);
 void _sigint(int signal);
 bool read_input(dets_t *dets);
+quote_state_t _read_input(char **lineptr, int fd);
 
 #endif /* _HSH_H_*/

@@ -22,7 +22,7 @@ bool read_input(dets_t *dets)
 		line = strjoin(NULL, "", temp, dets->line);
 		free(temp);
 		free(dets->line);
-		if (dets->interactive)
+		if (dets->from_terminal)
 			write(STDERR_FILENO, "> ", 2);
 		dets->linenom += 1;
 	}
