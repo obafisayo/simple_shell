@@ -14,7 +14,7 @@ int main(int argc, char **argv)
 	signal(SIGINT, _sigint);
 	while (read_input(dets))
 	{
-		dets->commands = cmd_to_list(dets->line);
+		parse(dets);
 		while ((dets->tokens = pop_cmd(&(dets->commands))))
 		{
 			exec(dets);

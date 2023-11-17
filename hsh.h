@@ -26,6 +26,14 @@
 
 extern char **environ;
 
+void expand_aliases(alias_t *aliases, char ***tokptr);
+char *expand_alias(alias_t *aliases, char ***tokptr);
+
+void expand_vars(dets_t *dets, char ***tokptr);
+char **_expand_vars(dets_t *dets, char ***tokptr);
+
+int parse(dets_t *dets);
+void remove_comments(cmdlist_t *cmd);
 void free_tokens(char ***tokens);
 int exec(dets_t *dets);
 int _exec(dets_t *dets);
