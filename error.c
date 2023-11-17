@@ -7,13 +7,13 @@
   */
 void perrorl(const char *msg, ...)
 {
-	const char *string;
+	const char *str;
 	va_list cont;
 
 	va_start(cont, msg);
-	while ((string = va_arg(cont, char *)))
+	while ((str = va_arg(cont, char *)))
 	{
-		write(STDERR_FILENO, string, _strlen(str));
+		write(STDERR_FILENO, str, _strlen(str));
 		write(STDERR_FILENO, ": ", 2);
 	}
 	va_end(cont);
@@ -34,7 +34,7 @@ void perrorl(const char *msg, ...)
 void perrorl_default(const char *arg0, size_t lineno, const char *msg, ...)
 {
 	char *linenostr = num_to_str(lineno);
-	const char *string = NULL;
+	const char *str = NULL;
 	va_list ap;
 
 	if (arg0)
@@ -46,9 +46,9 @@ void perrorl_default(const char *arg0, size_t lineno, const char *msg, ...)
 	write(STDERR_FILENO, ": ", 2);
 
 	va_start(ap, msg);
-	while ((string = va_arg(ap, char *)))
+	while ((str = va_arg(ap, char *)))
 	{
-		write(STDERR_FILENO, string, _strlen(string));
+		write(STDERR_FILENO, str, _strlen(str));
 		write(STDERR_FILENO, ": ", 2);
 	}
 	va_end(ap);
