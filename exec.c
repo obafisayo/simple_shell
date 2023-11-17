@@ -67,8 +67,8 @@ int _exec(dets_t *dets)
 			close(dets->filenom);
 
 		free(exec);
-		free_tokens(av);
-		free_tokens(envt);
+		free_tokens(&av);
+		free_tokens(&envt);
 		exit(EXIT_FAILURE);
 		break;
 
