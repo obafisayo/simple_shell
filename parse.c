@@ -30,7 +30,13 @@ int parse(dets_t *dets)
 			del_cmd(&(dets->commands), n);
 			continue;
 		}
-
+		expand_vars(dets, &(cmd->tokens));
+		if (!cmd->tokens)
+		{
+			cmd = cmd->next;
+			del_cmd(&(dets->commands), n);
+			continue;
+		}
 		tokens = cmd->tokens;
 		for (tok = *tokens; tok; tok = *(++tokens))
 		{
