@@ -9,7 +9,7 @@
  */
 bool read_input(dets_t *dets)
 {
-	char *line = NULL, *temp = NULL;
+	char *line = NULL, *temporary = NULL;
 
 	if (dets->interactive)
 		write(STDERR_FILENO, "$ ", 2);
@@ -18,9 +18,9 @@ bool read_input(dets_t *dets)
 	while (_read_input(&dets->line, dets->fileno) &
 		(QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 	{
-		temp = line;
-		line = strjoin(NULL, "", temp, dets->line);
-		free(temp);
+		temporay = line;
+		line = strjoin(NULL, "", temporary, dets->line);
+		free(temporary);
 		free(dets->line);
 		if (dets->interactive)
 			write(STDERR_FILENO, "> ", 2);
@@ -28,9 +28,9 @@ bool read_input(dets_t *dets)
 	}
 	if (line)
 	{
-		temp = dets->line;
-		dets->line = strjoin(NULL, "", line, temp);
-		free(temp);
+		temporary = dets->line;
+		dets->line = strjoin(NULL, "", line, temporary);
+		free(temporary);
 		free(line);
 	}
 	return (dets->line);
