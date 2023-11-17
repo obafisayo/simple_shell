@@ -37,46 +37,46 @@ void __alias_print(alias_t *alias)
 
 /**
  * __alias - create and display aliases
- * @info: shell info struct
+ * @dets: shell dets struct
  *
  * Return: status
  */
-int __alias(info_t *info)
+int __alias(dets_t *dets)
 {
 	alias_t *alias;
-	char *name, **args = info->tokens + 1;
+	char *name, **args = dets->tokens + 1;
 	ssize_t name_len;
 
-	info->status = EXIT_SUCCESS;
+	dets->status = EXIT_SUCCESS;
 	if (*args)
 	{
 		do {
 			name_len = _strchr(*args, '=');
 			if (name_len == -1)
 			{
-				alias = get_dict_node(info->aliases, *args);
+				alias = get_dict_node(dets->aliases, *args);
 				if (alias)
 				{
 					__alias_print(alias);
 				}
 				else
 				{
-					perrorl("not found", *info->tokens, *args, NULL);
-					info->status = EXIT_FAILURE;
+					perrorl("not found", *dets->tokens, *args, NULL);
+					dets->status = EXIT_FAILURE;
 				}
 			}
 			else
 			{
 				name = _strndup(*args, name_len);
-				__alias_add(&info->aliases, name, *args + name_len + 1);
+				__alias_add(&dets->aliases, name, *args + name_len + 1);
 				free(name);
 			}
 		} while (*++args);
 	}
 	else
 	{
-		for (alias = info->aliases; alias; alias = alias->next)
+		for (alias = dets->aliases; alias; alias = alias->next)
 			__alias_print(alias);
 	}
-	return (info->status);
+	return (dets->status);
 }

@@ -2,16 +2,16 @@
 
 /**
   * __env - displays environment
-  * @info: arguments passed
+  * @dets: arguments passed
   * Return: int
   */
-int __env(info_t *info)
+int __env(dets_t *dets)
 {
 	env_t *var;
 
-	info->status = EXIT_SUCCESS;
+	dets->status = EXIT_SUCCESS;
 
-	for (var = info->env; var; var = var->next)
+	for (var = dets->env; var; var = var->next)
 	{
 		if (var->key)
 			write(STDOUT_FILENO, var->key, _strlen(var->key));
@@ -20,5 +20,5 @@ int __env(info_t *info)
 			write(STDOUT_FILENO, var->val, _strlen(var->val));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	return (info->status);
+	return (dets->status);
 }

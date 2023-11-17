@@ -1,5 +1,5 @@
-#ifndef _INFO_H_
-#define _INFO_H_
+#ifndef _DETS_H_
+#define _DETS_H_
 
 #include <stdlib.h>
 #include <unistd.h>
@@ -18,7 +18,7 @@
 extern char **environ;
 
 /**
-  * struct info - shell state
+  * struct dets - shell state
   * @interactive: arguments passed
   * @argc: arguments passed
   * @argv: arguments passed
@@ -37,7 +37,7 @@ extern char **environ;
   * @history: arguments passed
   * @commands: arguments passed
   */
-struct info
+struct dets
 {
 	int interactive;
 	int argc;
@@ -58,7 +58,7 @@ struct info
 	cmdlist_t *commands;
 };
 
-info_t *init_info(int argc, char **argv);
-int free_info(info_t *info);
+dets_t *init_dets(int argc, char **argv);
+int free_dets(dets_t *dets);
 
-#endif /* _INFO_H_ */
+#endif /* _DETS_H_ */

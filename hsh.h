@@ -17,7 +17,7 @@
 #include "dict.h"
 #include "env.h"
 #include "error.h"
-#include "info.h"
+#include "dets.h"
 #include "list.h"
 #include "path.h"
 #include "quote.h"
@@ -27,23 +27,23 @@
 
 extern char **environ;
 
-bool read_input(info_t *info);
+bool read_input(dets_t *dets);
 quote_state_t _read_input(char **lineptr, int fd);
 
-int parse(info_t *info);
+int parse(dets_t *dets);
 
-int execute(info_t *info);
-int _execute(info_t *info);
+int execute(dets_t *dets);
+int _execute(dets_t *dets);
 
 void expand_aliases(alias_t *aliases, char ***tokptr);
 char *expand_alias(alias_t *aliases, char ***tokptr);
 
-void expand_vars(info_t *info, char ***tokptr);
-char **_expand_vars(info_t *info, char ***tokptr);
+void expand_vars(dets_t *dets, char ***tokptr);
+char **_expand_vars(dets_t *dets, char ***tokptr);
 
 void remove_comments(cmdlist_t *cmd);
 
-void open_script(info_t *info);
+void open_script(dets_t *dets);
 
 void _sigint(int signal);
 

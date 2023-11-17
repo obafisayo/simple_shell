@@ -2,17 +2,17 @@
 
 /**
  * parse - parse input
- * @info: shell information
+ * @dets: shell detsrmation
  *
  * Description: This function expands aliases, variables, and word splitting
  *
  * Return: the final number of tokens
  */
-int parse(info_t *info)
+int parse(dets_t *dets)
 {
 	char **tokens, *tok;
 	size_t n = 0;
-	cmdlist_t *cmd = info->commands = cmd_to_list(info->line);
+	cmdlist_t *cmd = dets->commands = cmd_to_list(dets->line);
 
 	while (cmd)
 	{
@@ -20,21 +20,21 @@ int parse(info_t *info)
 		if (!cmd->tokens)
 		{
 			cmd = cmd->next;
-			del_cmd(&(info->commands), n);
+			del_cmd(&(dets->commands), n);
 			continue;
 		}
-		expand_aliases(info->aliases, &(cmd->tokens));
+		expand_aliases(dets->aliases, &(cmd->tokens));
 		if (!cmd->tokens)
 		{
 			cmd = cmd->next;
-			del_cmd(&(info->commands), n);
+			del_cmd(&(dets->commands), n);
 			continue;
 		}
-		expand_vars(info, &(cmd->tokens));
+		expand_vars(dets, &(cmd->tokens));
 		if (!cmd->tokens)
 		{
 			cmd = cmd->next;
-			del_cmd(&(info->commands), n);
+			del_cmd(&(dets->commands), n);
 			continue;
 		}
 		tokens = cmd->tokens;

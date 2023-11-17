@@ -8,7 +8,7 @@
 #include "alias.h"
 #include "env.h"
 #include "error.h"
-#include "info.h"
+#include "dets.h"
 #include "path.h"
 #include "string.h"
 #include "types.h"
@@ -50,7 +50,7 @@
 
 #define HELP_HELP "help [BUILTIN]"
 #define HELP_DESC								\
-	"Display information about builtin commands.\n\0"			\
+	"Display detsrmation about builtin commands.\n\0"			\
 	"If BUILTIN is omitted, the available commands are displayed.\0"	\
 	"\0"
 
@@ -66,7 +66,7 @@
 	"Remove the variable NAME from the environment.\0"			\
 	"\0"
 
-typedef int (*builtin_fp)(info_t *);
+typedef int (*builtin_fp)(dets_t *);
 
 /**
  * struct builtin - builtin command
@@ -86,14 +86,14 @@ struct builtin
 const struct builtin *get_builtin(const char *name);
 const struct builtin *get_builtins(void);
 
-int __alias(info_t *info);
-int __cd(info_t *info);
-int __env(info_t *info);
-int __exec(info_t *info);
-int __exit(info_t *info);
-int __help(info_t *info);
-int __history(info_t *info);
-int __setenv(info_t *info);
-int __unsetenv(info_t *info);
+int __alias(dets_t *dets);
+int __cd(dets_t *dets);
+int __env(dets_t *dets);
+int __exec(dets_t *dets);
+int __exit(dets_t *dets);
+int __help(dets_t *dets);
+int __history(dets_t *dets);
+int __setenv(dets_t *dets);
+int __unsetenv(dets_t *dets);
 
 #endif /* _BUILTINS_H_ */

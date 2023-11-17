@@ -2,30 +2,30 @@
 
 /**
   * __exit - exits from shell
-  * @info: arguments passed
+  * @dets: arguments passed
   * Return: int
   */
-int __exit(info_t *info)
+int __exit(dets_t *dets)
 {
-	char **args = info->tokens + 1;
+	char **args = dets->tokens + 1;
 
 	if (*args)
 	{
 		if (_isnumber(*args) && atou(*args) <= INT_MAX)
 		{
-			info->status = atou(*args);
+			dets->status = atou(*args);
 		}
 		else
 		{
-			perrorl_default(*info->argv, info->lineno, *args,
-					*info->tokens, "Illegal number", NULL);
-			info->status = 2;
+			perrorl_default(*dets->argv, dets->lineno, *args,
+					*dets->tokens, "Illegal number", NULL);
+			dets->status = 2;
 
-			return (info->status);
+			return (dets->status);
 		}
 	}
-	if (info->file)
-		close(info->fileno);
+	if (dets->file)
+		close(dets->fileno);
 
-	exit(free_info(info));
+	exit(free_dets(dets));
 }

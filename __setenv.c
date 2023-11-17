@@ -2,14 +2,14 @@
 
 /**
  * __setenv - sets the environment variables
- * @info: arguments passed
+ * @dets: arguments passed
  *
  * Return: status
  */
-int __setenv(info_t *info)
+int __setenv(dets_t *dets)
 {
 	env_t *var;
-	char **args = info->tokens + 1, *val;
+	char **args = dets->tokens + 1, *val;
 
 	if (args[0])
 	{
@@ -17,9 +17,9 @@ int __setenv(info_t *info)
 		{
 			if (args[2])
 			{
-				perrorl("Too many arguments.", *info->tokens, NULL);
-				info->status = EXIT_FAILURE;
-				return (info->status);
+				perrorl("Too many arguments.", *dets->tokens, NULL);
+				dets->status = EXIT_FAILURE;
+				return (dets->status);
 			}
 			val = args[1];
 		}
@@ -27,7 +27,7 @@ int __setenv(info_t *info)
 		{
 			val = "";
 		}
-		var = get_dict_node(info->env, args[0]);
+		var = get_dict_node(dets->env, args[0]);
 		if (var)
 		{
 			free(var->val);
@@ -35,13 +35,13 @@ int __setenv(info_t *info)
 		}
 		else
 		{
-			add_dict_node_end(&info->env, args[0], val);
+			add_dict_node_end(&dets->env, args[0], val);
 		}
-		info->status = EXIT_SUCCESS;
+		dets->status = EXIT_SUCCESS;
 	}
 	else
 	{
-		__env(info);
+		__env(dets);
 	}
-	return (info->status);
+	return (dets->status);
 }

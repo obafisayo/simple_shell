@@ -9,26 +9,26 @@
  */
 int main(int argc, char **argv)
 {
-	info_t *info = init_info(argc, argv);
+	dets_t *dets = init_dets(argc, argv);
 
 	signal(2, _sigint);
 
-	while (read_input(info))
+	while (read_input(dets))
 	{
-		parse(info);
-		while ((info->tokens = pop_cmd(&(info->commands))))
+		parse(dets);
+		while ((dets->tokens = pop_cmd(&(dets->commands))))
 		{
-			execute(info);
-			free_tokens(&(info->tokens));
+			execute(dets);
+			free_tokens(&(dets->tokens));
 		}
-		free(info->line);
-		info->line = NULL;
+		free(dets->line);
+		dets->line = NULL;
 	}
-	if (info->interactive)
+	if (dets->interactive)
 		write(STDOUT_FILENO, "\n", 1);
 
-	if (info->file)
-		close(info->fileno);
+	if (dets->file)
+		close(dets->fileno);
 
-	exit(free_info(info));
+	exit(free_dets(dets));
 }

@@ -3,37 +3,37 @@
 
 /**
  * read_input - get input
- * @info: shell information
+ * @dets: shell detsrmation
  *
  * Return: line size
  */
-bool read_input(info_t *info)
+bool read_input(dets_t *dets)
 {
 	char *line = NULL, *temp = NULL;
 
-	if (info->interactive)
+	if (dets->interactive)
 		write(STDERR_FILENO, "$ ", 2);
 
-	info->lineno += 1;
-	while (_read_input(&info->line, info->fileno) &
+	dets->lineno += 1;
+	while (_read_input(&dets->line, dets->fileno) &
 		(QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 	{
 		temp = line;
-		line = strjoin(NULL, "", temp, info->line);
+		line = strjoin(NULL, "", temp, dets->line);
 		free(temp);
-		free(info->line);
-		if (info->interactive)
+		free(dets->line);
+		if (dets->interactive)
 			write(STDERR_FILENO, "> ", 2);
-		info->lineno += 1;
+		dets->lineno += 1;
 	}
 	if (line)
 	{
-		temp = info->line;
-		info->line = strjoin(NULL, "", line, temp);
+		temp = dets->line;
+		dets->line = strjoin(NULL, "", line, temp);
 		free(temp);
 		free(line);
 	}
-	return (info->line);
+	return (dets->line);
 }
 
 

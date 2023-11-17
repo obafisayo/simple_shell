@@ -2,17 +2,17 @@
 
 /**
  * expand_vars - perform variable expansion on the current set of tokens
- * @info: shell information
+ * @dets: shell detsrmation
   * @tokptr: pointer to the current tokens
  */
-void expand_vars(info_t *info, char ***tokptr)
+void expand_vars(dets_t *dets, char ***tokptr)
 {
 	char **new = NULL, **old, **tmp, **tokens;
 
 	for (tokens = *tokptr; **tokptr; ++(*tokptr))
 	{
 		old = new;
-		tmp = _expand_vars(info, tokptr);
+		tmp = _expand_vars(dets, tokptr);
 		new = arrjoin(old, tmp);
 		free_tokens(&old);
 		free_tokens(&tmp);
@@ -25,12 +25,12 @@ void expand_vars(info_t *info, char ***tokptr)
 
 /**
  * _expand_vars - perform variable expansion on a token
- * @info: shell information
+ * @dets: shell detsrmation
   * @tokptr: pointer to the current tokens
  *
  * Return: the expanded token
  */
-char **_expand_vars(info_t *info, char ***tokptr)
+char **_expand_vars(dets_t *dets, char ***tokptr)
 {
 	char *var = NULL, *val = NULL, *tok = **tokptr;
 	size_t pos = 0, var_len, val_len;
@@ -79,11 +79,11 @@ char **_expand_vars(info_t *info, char ***tokptr)
 		}
 		if (tok[pos + 1] == '$')
 		{
-			val = num_to_str(info->pid);
+			val = num_to_str(dets->pid);
 		}
 		else if (tok[pos + 1] == '?')
 		{
-			val = num_to_str(info->status);
+			val = num_to_str(dets->status);
 		}
 		else if (_isident(tok[pos + 1]) && !_isdigit(tok[pos + 1]))
 		{
@@ -91,7 +91,7 @@ char **_expand_vars(info_t *info, char ***tokptr)
 				++var_len;
 
 			var = _strndup(tok + pos + 1, var_len);
-			val = get_dict_val(info->env, var);
+			val = get_dict_val(dets->env, var);
 
 			if (val)
 				val = _strdup(val);

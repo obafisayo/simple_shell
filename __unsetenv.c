@@ -2,23 +2,23 @@
 
 /**
   * __unsetenv - unsets the environment variable
-  * @info: arguments passed
+  * @dets: arguments passed
   * Return: status
   */
-int __unsetenv(info_t *info)
+int __unsetenv(dets_t *dets)
 {
-	char **args = info->tokens + 1;
+	char **args = dets->tokens + 1;
 
 	if (*args)
 	{
 		while (*args)
-			del_dict_node(&info->env, *args++);
-		info->status = EXIT_SUCCESS;
+			del_dict_node(&dets->env, *args++);
+		dets->status = EXIT_SUCCESS;
 	}
 	else
 	{
-		perrorl("Too few arguments.", *info->tokens, NULL);
-		info->status = EXIT_FAILURE;
+		perrorl("Too few arguments.", *dets->tokens, NULL);
+		dets->status = EXIT_FAILURE;
 	}
-	return (info->status);
+	return (dets->status);
 }

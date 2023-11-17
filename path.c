@@ -2,19 +2,19 @@
 
 /**
   * search_path - searches for the directory with the executable program
-  * @info: argument passed
+  * @dets: argument passed
   * @path: argument passed
   * Return: pointer to directory string
   */
-char *search_path(info_t *info, list_t *path)
+char *search_path(dets_t *dets, list_t *path)
 {
-	char *pathname, *command = *info->tokens;
+	char *pathname, *command = *dets->tokens;
 	struct stat sb;
 
 	while (path)
 	{
 		if (*path->str == '\0')
-			pathname = strjoin(NULL, "/", info->cwd, command);
+			pathname = strjoin(NULL, "/", dets->cwd, command);
 		else
 			pathname = strjoin(NULL, "/", path->str, command);
 		if (stat(pathname, &sb) == 0)

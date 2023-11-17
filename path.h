@@ -5,11 +5,11 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-#include "info.h"
+#include "dets.h"
 #include "list.h"
 #include "string.h"
 #include "types.h"
 
-char *search_path(info_t *info, list_t *path);
+char *search_path(dets_t *dets, list_t *path);
 
 #endif /* PATH_H */

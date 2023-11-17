@@ -2,48 +2,48 @@
 
 /**
  * __exec - replace the running shell with a new program
- * @info: arguments passed
+ * @dets: arguments passed
  * Return: int
  */
-int __exec(info_t *info)
+int __exec(dets_t *dets)
 {
-	char *exe, **args = info->tokens + 1, **env = NULL;
+	char *exe, **args = dets->tokens + 1, **env = NULL;
 
 	if (!*args)
-		return ((info->status = EXIT_SUCCESS));
+		return ((dets->status = EXIT_SUCCESS));
 
-	info->tokens = args;
+	dets->tokens = args;
 	args = arrdup(args);
 
 	if (_strchr(*args, '/') == -1)
 	{
-		free_list(&info->path);
-		info->path = str_to_list(get_dict_val(info->env, "PATH"), ':');
-		exe = search_path(info, info->path);
+		free_list(&dets->path);
+		dets->path = str_to_list(get_dict_val(dets->env, "PATH"), ':');
+		exe = search_path(dets, dets->path);
 	}
 	else
 	{
 		exe = _strdup(*args);
 	}
-	info->tokens -= 1;
+	dets->tokens -= 1;
 
 	if (access(exe, X_OK) == 0)
 	{
-		env = dict_to_env(info->env);
+		env = dict_to_env(dets->env);
 
-		free_info(info);
+		free_dets(dets);
 		execve(exe, args, env);
-		perrorl_default(*info->argv, info->lineno, "Not found",
-				*info->tokens, *args, NULL);
+		perrorl_default(*dets->argv, dets->lineno, "Not found",
+				*dets->tokens, *args, NULL);
 		free(exe);
 		free_tokens(&args);
 		free_tokens(&env);
 		exit(127);
 	}
-	perrorl_default(*info->argv, info->lineno, "Permission denied",
-			*info->tokens, *args, NULL);
+	perrorl_default(*dets->argv, dets->lineno, "Permission denied",
+			*dets->tokens, *args, NULL);
 	free(exe);
 	free_tokens(&args);
-	free_info(info);
+	free_dets(dets);
 	exit(126);
 }

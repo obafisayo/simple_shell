@@ -2,19 +2,19 @@
 
 /**
  * __help - show help for builtins commands
- * @info: shell info
+ * @dets: shell dets
  * Return: status
  */
-int __help(struct info *info)
+int __help(struct dets *dets)
 {
 	const builtin_t *bp = NULL;
-	char * const *args = info->tokens + 1;
+	char * const *args = dets->tokens + 1;
 	const char *desc = NULL;
 	size_t len = 0;
 
 	if (*args)
 	{
-		info->status = EXIT_FAILURE;
+		dets->status = EXIT_FAILURE;
 		while (*args)
 		{
 			bp = get_builtin(*args);
@@ -30,20 +30,20 @@ int __help(struct info *info)
 					write(STDOUT_FILENO, desc, len);
 					write(STDOUT_FILENO, "\n", 1);
 				}
-				info->status = EXIT_SUCCESS;
+				dets->status = EXIT_SUCCESS;
 			}
 			args += 1;
 		}
-		if (info->status == EXIT_FAILURE)
-			perrorl_default(*info->argv, info->lineno, "No topics match",
-					*info->tokens, *(args - 1), NULL);
-		return (info->status);
+		if (dets->status == EXIT_FAILURE)
+			perrorl_default(*dets->argv, dets->lineno, "No topics match",
+					*dets->tokens, *(args - 1), NULL);
+		return (dets->status);
 	}
-	info->status = EXIT_SUCCESS;
+	dets->status = EXIT_SUCCESS;
 	for (bp = get_builtins(); bp->name; bp += 1)
 	{
 		write(STDOUT_FILENO, bp->help, _strlen(bp->help));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	return (info->status);
+	return (dets->status);
 }
