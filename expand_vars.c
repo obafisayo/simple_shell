@@ -91,7 +91,7 @@ char **_expand_vars(dets_t *dets, char ***tokptr)
 				++var_len;
 
 			var = _strndup(tok + pos + 1, var_len);
-			val = dict_get_val(dets->envt, var);
+			val = dict_get_value(dets->envt, var);
 
 			if (val)
 				val = _strdup(val);
