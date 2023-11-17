@@ -14,6 +14,7 @@
 #include "quote.h"
 #include "tokens.h"
 #include "command.h"
+
 extern char **environ;
 
 /**
@@ -33,6 +34,7 @@ extern char **environ;
  * @envt: stores a duplicate of the environ string
  * @path: stores the path value
  * @aliases: stores the created alias
+ * @command: stores the command passed to the executable
 */
 struct dets
 {
@@ -51,7 +53,7 @@ struct dets
 	envt_t *envt;
 	list_t *path;
 	alias_t *aliases;
-	cmdlist_t commands;
+	cmdlist_t *commands;
 };
 
 dets_t *init_dets(int argc, char **argv);

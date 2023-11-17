@@ -6,6 +6,8 @@
 #include "string.h"
 #include "tokens.h"
 #include "typedef.h"
+#include "dets.h"
+#include "hsh.h"
 
 
 /**
