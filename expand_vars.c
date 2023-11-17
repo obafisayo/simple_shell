@@ -7,15 +7,15 @@
  */
 void expand_vars(dets_t *dets, char ***tokptr)
 {
-	char **new = NULL, **old, **tmp, **tokens;
+	char **new = NULL, **old, **temporary, **tokens;
 
 	for (tokens = *tokptr; **tokptr; ++(*tokptr))
 	{
 		old = new;
-		tmp = _expand_vars(dets, tokptr);
-		new = arrjoin(old, tmp);
+		temporary = _expand_vars(dets, tokptr);
+		new = arrjoin(old, temporary);
 		free_tokens(&old);
-		free_tokens(&tmp);
+		free_tokens(&temporary);
 		free(**tokptr);
 	}
 	free(tokens);
