@@ -43,7 +43,7 @@ void __alias_print(alias_t *alias)
  */
 int __alias(dets_t *dets)
 {
-	alias_t *alias;
+	alias_t *ali;
 	char *name, **args = dets->tokens + 1;
 	ssize_t name_len;
 
@@ -54,10 +54,10 @@ int __alias(dets_t *dets)
 			name_len = _strchr(*args, '=');
 			if (name_len == -1)
 			{
-				alias = get_dict_node(dets->aliases, *args);
-				if (alias)
+				ali = get_dict_node(dets->aliases, *args);
+				if (ali)
 				{
-					__alias_print(alias);
+					__alias_print(ali);
 				}
 				else
 				{
@@ -75,8 +75,8 @@ int __alias(dets_t *dets)
 	}
 	else
 	{
-		for (alias = dets->aliases; alias; alias = alias->next)
-			__alias_print(alias);
+		for (ali = dets->aliases; ali; ali = ali->next)
+			__alias_print(ali);
 	}
 	return (dets->status);
 }
