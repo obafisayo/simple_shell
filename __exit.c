@@ -7,17 +7,17 @@
   */
 int __exit(dets_t *dets)
 {
-	char **args = dets->tokens + 1;
+	char **arguments = dets->tokens + 1;
 
-	if (*args)
+	if (*arguments)
 	{
-		if (_isnumber(*args) && atou(*args) <= INT_MAX)
+		if (_isnumber(*arguments) && atou(*arguments) <= INT_MAX)
 		{
-			dets->status = atou(*args);
+			dets->status = atou(*arguments);
 		}
 		else
 		{
-			perrorl_default(*dets->argv, dets->lineno, *args,
+			perrorl_default(*dets->argv, dets->lineno, *arguments,
 					*dets->tokens, "Illegal number", NULL);
 			dets->status = 2;
 
