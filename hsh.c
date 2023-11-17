@@ -12,6 +12,7 @@ int main(int argc, char **argv)
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
+
 	while (read_input(dets))
 	{
 		parse(dets);

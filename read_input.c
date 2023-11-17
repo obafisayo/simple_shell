@@ -69,6 +69,8 @@ quote_state_t _read_input(char **lineptr, int fd)
 					index += 1;
 			} while (line[index]);
 		}
+		if (line != NULL)
+			free(line);
 	}
 	return (state);
 }

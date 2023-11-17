@@ -7,5 +7,6 @@ typedef struct list_s list_t;
 typedef struct builtin builtin_t;
 typedef struct cmdlist cmdlist_t;
 typedef struct cmdtree cmdtree_t;
+typedef struct history history_t;
 
 #endif /* _TYPEDEF_H_*/

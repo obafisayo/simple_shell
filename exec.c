@@ -11,6 +11,7 @@ int exec(dets_t *dets)
 
 	if (builtin)
 		return (builtin->func(dets));
+
 	if (_strchr(*dets->tokens, '/') == -1)
 	{
 		free_list(&dets->path);
@@ -71,12 +72,10 @@ int _exec(dets_t *dets)
 		free_tokens(&envt);
 		exit(EXIT_FAILURE);
 		break;
-
 	case -1:
 		perrorl_default(*dets->argv, dets->linenom, "Cannot fork", NULL);
 		dets->status = 2;
 		break;
-
 	default:
 		wait(&dets->status);
 		dets->status = WEXITSTATUS(dets->status);

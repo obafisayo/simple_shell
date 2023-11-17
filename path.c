@@ -9,7 +9,7 @@
 char *get_path(dets_t *dets, list_t *path)
 {
 	char *pathname, *command = *dets->tokens;
-	struct stat sb;
+	struct stat st;
 
 	while (path)
 	{
@@ -17,9 +17,9 @@ char *get_path(dets_t *dets, list_t *path)
 			pathname = strjoin(NULL, "/", dets->cwd, command);
 		else
 			pathname = strjoin(NULL, "/", path->str, command);
-		if (stat(pathname, &sb) == 0)
+		if (stat(pathname, &st) == 0)
 		{
-			if ((sb.st_mode & S_IFMT) != S_IFDIR)
+			if ((st.st_mode & S_IFMT) != S_IFDIR)
 				return (pathname);
 		}
 		free(pathname);

@@ -1,23 +1,6 @@
 #include "builtin.h"
 
 /**
- * get_builtin - get a builtin by name
- * @name: the name of the builtin to retrieve
- * Return: NULL if no match is found, otherwise a pointer to the builtin
- */
-const builtin_t *get_builtin(const char *name)
-{
-	const builtin_t *builtin = NULL;
-
-	for (builtin = get_builtins(); builtin->name; builtin += 1)
-	{
-		if (_strcmp(name, builtin->name) == 0)
-			return (builtin);
-	}
-	return (NULL);
-}
-
-/**
  * get_builtins - get the builtins
  * Return: pointer to a NULL-terminated statically-allocated array of builtins
  */
@@ -36,4 +19,21 @@ const builtin_t *get_builtins(void)
 	};
 
 	return (builtins);
+}
+
+/**
+ * get_builtin - get a builtin by name
+ * @name: the name of the builtin to retrieve
+ * Return: NULL if no match is found, otherwise a pointer to the builtin
+ */
+const builtin_t *get_builtin(const char *name)
+{
+	const builtin_t *builtin = NULL;
+
+	for (builtin = get_builtins(); builtin->name; builtin += 1)
+	{
+		if (_strcmp(name, builtin->name) == 0)
+			return (builtin);
+	}
+	return (NULL);
 }

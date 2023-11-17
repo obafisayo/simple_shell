@@ -50,11 +50,12 @@ int free_dets(dets_t *dets)
 {
 	free_tokens(&dets->tokens);
 	free(dets->line);
+	dets->line = _getline(-1);
 	free(dets->cwd);
 	dets->cwd = NULL;
 	free(dets->exe);
 	dets->exe = NULL;
-	free_dict((dict_t **)&dets->envt);
+	free_dict(&dets->envt);
 	free_dict(&dets->aliases);
 	free_list(&dets->path);
 	free_cmdlist(&dets->commands);
