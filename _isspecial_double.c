@@ -1,4 +1,4 @@
-#include "ctype.h"
+#include "quote.h"
 
 /**
  * _isspecial_double - check if a character is special inside double quotes

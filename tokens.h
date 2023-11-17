@@ -1,5 +1,5 @@
-#ifndef TOKS_H
-#define TOKS_H
+#ifndef TOKENS_H
+#define TOKENS_H
 
 #include <stdlib.h>
 #include "quote.h"
@@ -17,4 +17,4 @@ char **arrdup(char **arr);
 
 char **arrjoin(char **arr1, char **arr2);
 
-#endif /* TOKS_H */
+#endif /* TOKENS_H */

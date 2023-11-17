@@ -1,15 +1,15 @@
-#include "builtin.h"
+#include "builtins.h"
 
 /**
  * __setenv - sets the environment variables
- * @dets: arguments passed
+ * @info: arguments passed
  *
  * Return: status
  */
-int __setenv(dets_t *dets)
+int __setenv(info_t *info)
 {
-	envt_t *var;
-	char **args = dets->tokens + 1, *val;
+	env_t *var;
+	char **args = info->tokens + 1, *val;
 
 	if (args[0])
 	{
@@ -17,9 +17,9 @@ int __setenv(dets_t *dets)
 		{
 			if (args[2])
 			{
-				perrorl("Too many arguments.", *dets->tokens, NULL);
-				dets->status = EXIT_FAILURE;
-				return (dets->status);
+				perrorl("Too many arguments.", *info->tokens, NULL);
+				info->status = EXIT_FAILURE;
+				return (info->status);
 			}
 			val = args[1];
 		}
@@ -27,21 +27,21 @@ int __setenv(dets_t *dets)
 		{
 			val = "";
 		}
-		var = dict_get_node(dets->envt, args[0]);
+		var = get_dict_node(info->env, args[0]);
 		if (var)
 		{
-			free(var->value);
-			var->value = _strdup(val);
+			free(var->val);
+			var->val = _strdup(val);
 		}
 		else
 		{
-			dict_add_node_end(&dets->envt, args[0], val);
+			add_dict_node_end(&info->env, args[0], val);
 		}
-		dets->status = EXIT_SUCCESS;
+		info->status = EXIT_SUCCESS;
 	}
 	else
 	{
-		__env(dets);
+		__env(info);
 	}
-	return (dets->status);
+	return (info->status);
 }

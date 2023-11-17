@@ -1,24 +1,24 @@
-#include "builtin.h"
+#include "builtins.h"
 
 /**
   * __env - displays environment
-  * @dets: arguments passed
+  * @info: arguments passed
   * Return: int
   */
-int __env(dets_t *dets)
+int __env(info_t *info)
 {
-	envt_t *var;
+	env_t *var;
 
-	dets->status = EXIT_SUCCESS;
+	info->status = EXIT_SUCCESS;
 
-	for (var = dets->envt; var; var = var->next_node)
+	for (var = info->env; var; var = var->next)
 	{
 		if (var->key)
 			write(STDOUT_FILENO, var->key, _strlen(var->key));
 		write(STDOUT_FILENO, "=", 1);
-		if (var->value)
-			write(STDOUT_FILENO, var->value, _strlen(var->value));
+		if (var->val)
+			write(STDOUT_FILENO, var->val, _strlen(var->val));
 		write(STDOUT_FILENO, "\n", 1);
 	}
-	return (dets->status);
+	return (info->status);
 }

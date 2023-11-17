@@ -3,27 +3,26 @@
 
 #include <stdlib.h>
 
-#include "typedef.h"
 #include "string.h"
+#include "types.h"
 
 /**
- * struct dict - This is a singly linked list of key=value pairs
- * @key: This is the key variable
- * @value: This is the value variable of the key
- * @next_node: This is a pointer to the next key=value pair node
-*/
+  * struct dict - singly linked list of key-value pairs
+  * @key: variable name
+  * @val: value of variable
+  * @next: pointer to the next node
+  */
 struct dict
 {
 	char *key;
-	char *value;
-	struct dict *next_node;
+	char *val;
+	struct dict *next;
 };
 
-dict_t *dict_add_node_end(dict_t **headptr,
-const char *key, const char *value);
-dict_t *dict_get_node(dict_t *head, const char *key);
-char *dict_get_value(dict_t *head, const char *key);
-dict_t *dict_del_node(dict_t **headptr, const char *key);
+char *get_dict_val(dict_t *head, const char *key);
+dict_t *get_dict_node(dict_t *head, const char *key);
+dict_t *add_dict_node_end(dict_t **headptr, const char *key, const char *val);
+dict_t *del_dict_node(dict_t **headptr, const char *key);
 void free_dict(dict_t **headptr);
 
 #endif /* _DICT_H_ */

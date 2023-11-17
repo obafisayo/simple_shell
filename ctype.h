@@ -10,7 +10,7 @@ bool _isdigit(int c);
 bool _isident(int c);
 bool _isspace(int c);
 bool _isquote(int c);
-int _isspecial_double(char c);
+
 bool _isnumber(const char *s);
 
 #endif /* _CTYPE_H_ */

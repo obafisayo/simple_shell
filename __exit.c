@@ -1,31 +1,31 @@
-#include "builtin.h"
+#include "builtins.h"
 
 /**
   * __exit - exits from shell
-  * @dets: arguments passed
+  * @info: arguments passed
   * Return: int
   */
-int __exit(dets_t *dets)
+int __exit(info_t *info)
 {
-	char **args = dets->tokens + 1;
+	char **args = info->tokens + 1;
 
 	if (*args)
 	{
 		if (_isnumber(*args) && atou(*args) <= INT_MAX)
 		{
-			dets->status = atou(*args);
+			info->status = atou(*args);
 		}
 		else
 		{
-			perrorl_default(*dets->argv, dets->linenom, *args,
-					*dets->tokens, "Illegal number", NULL);
-			dets->status = 2;
+			perrorl_default(*info->argv, info->lineno, *args,
+					*info->tokens, "Illegal number", NULL);
+			info->status = 2;
 
-			return (dets->status);
+			return (info->status);
 		}
 	}
-	if (dets->file)
-		close(dets->filenom);
+	if (info->file)
+		close(info->fileno);
 
-	exit(free_dets(dets));
+	exit(free_info(info));
 }

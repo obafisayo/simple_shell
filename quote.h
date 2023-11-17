@@ -1,5 +1,5 @@
-#ifndef _QUO_H_
-#define _QUO_H_
+#ifndef _QUOTE_H_
+#define _QUOTE_H_
 
 #include <stdlib.h>
 
@@ -41,4 +41,4 @@ int _isspecial_double(char c);
 char *dequote(const char *str);
 size_t dequote_len(const char *str);
 
-#endif /* _QUO_H_ */
+#endif /* _QUOTE_H_ */

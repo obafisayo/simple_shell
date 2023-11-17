@@ -1,25 +1,25 @@
-#include "hsh.h"
+#include "path.h"
 
 /**
-  * get_path - searches for the directory with the executable program
-  * @dets: argument passed
+  * search_path - searches for the directory with the executable program
+  * @info: argument passed
   * @path: argument passed
   * Return: pointer to directory string
   */
-char *get_path(dets_t *dets, list_t *path)
+char *search_path(info_t *info, list_t *path)
 {
-	char *pathname, *command = *dets->tokens;
-	struct stat st;
+	char *pathname, *command = *info->tokens;
+	struct stat sb;
 
 	while (path)
 	{
 		if (*path->str == '\0')
-			pathname = strjoin(NULL, "/", dets->cwd, command);
+			pathname = strjoin(NULL, "/", info->cwd, command);
 		else
 			pathname = strjoin(NULL, "/", path->str, command);
-		if (stat(pathname, &st) == 0)
+		if (stat(pathname, &sb) == 0)
 		{
-			if ((st.st_mode & S_IFMT) != S_IFDIR)
+			if ((sb.st_mode & S_IFMT) != S_IFDIR)
 				return (pathname);
 		}
 		free(pathname);

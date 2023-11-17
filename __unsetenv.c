@@ -1,24 +1,24 @@
-#include "builtin.h"
+#include "builtins.h"
 
 /**
   * __unsetenv - unsets the environment variable
-  * @dets: arguments passed
+  * @info: arguments passed
   * Return: status
   */
-int __unsetenv(dets_t *dets)
+int __unsetenv(info_t *info)
 {
-	char **args = dets->tokens + 1;
+	char **args = info->tokens + 1;
 
 	if (*args)
 	{
 		while (*args)
-			dict_del_node(&dets->envt, *args++);
-		dets->status = EXIT_SUCCESS;
+			del_dict_node(&info->env, *args++);
+		info->status = EXIT_SUCCESS;
 	}
 	else
 	{
-		perrorl("Too few arguments.", *dets->tokens, NULL);
-		dets->status = EXIT_FAILURE;
+		perrorl("Too few arguments.", *info->tokens, NULL);
+		info->status = EXIT_FAILURE;
 	}
-	return (dets->status);
+	return (info->status);
 }

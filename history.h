@@ -2,7 +2,7 @@
 #define _HISTORY_H_
 
 #include "list.h"
-#include "typedef.h"
+#include "types.h"
 
 /**
   * struct history - shell command history

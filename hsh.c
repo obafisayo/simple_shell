@@ -1,32 +1,34 @@
 #include "hsh.h"
 
 /**
- * main - This is the main entry point
- * @argc: This is the argument count
- * @argv: This is the argument vector
+ * main - entry point
+ * @argc: the argument count
+ * @argv: the argument vector
+ *
  * Return: Always 0
-*/
-
+ */
 int main(int argc, char **argv)
 {
-	dets_t *dets = init_dets(argc, argv);
+	info_t *info = init_info(argc, argv);
 
-	signal(SIGINT, _sigint);
+	signal(2, _sigint);
 
-	while (read_input(dets))
+	while (read_input(info))
 	{
-		parse(dets);
-		while ((dets->tokens = pop_cmd(&(dets->commands))))
+		parse(info);
+		while ((info->tokens = pop_cmd(&(info->commands))))
 		{
-			exec(dets);
-			free_tokens(&(dets->tokens));
+			execute(info);
+			free_tokens(&(info->tokens));
 		}
-		free(dets->line);
-		dets->line = NULL;
+		free(info->line);
+		info->line = NULL;
 	}
-	if (dets->from_terminal)
+	if (info->interactive)
 		write(STDOUT_FILENO, "\n", 1);
-	if (dets->file)
-		close(dets->filenom);
-	exit(free_dets(dets));
+
+	if (info->file)
+		close(info->fileno);
+
+	exit(free_info(info));
 }

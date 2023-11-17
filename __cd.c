@@ -1,17 +1,17 @@
-#include "builtin.h"
+#include "builtins.h"
 
 /**
  * __cd_error - print an error upon failure to change directory
- * @dets: shell dets
+ * @info: shell info
  * @dir: directory
  */
-void __cd_error(dets_t *dets, char *dir)
+void __cd_error(info_t *info, char *dir)
 {
 	char *error = strjoin(NULL, " ", "can't cd to", dir);
 
-	perrorl_default(*dets->argv, dets->linenom, error, *dets->tokens, NULL);
+	perrorl_default(*info->argv, info->lineno, error, *info->tokens, NULL);
 
-	dets->status = 2;
+	info->status = 2;
 
 	free(error);
 }
@@ -19,55 +19,55 @@ void __cd_error(dets_t *dets, char *dir)
 
 /**
  * __cd_success - update the environment upon success
- * @dets: shell dets
+ * @info: shell info
  */
-void __cd_success(dets_t *dets)
+void __cd_success(info_t *info)
 {
-	char **tokens = dets->tokens;
+	char **tokens = info->tokens;
 	char *setenv_tokens[] = {"setenv", NULL, NULL, NULL};
 
-	dets->tokens = setenv_tokens;
+	info->tokens = setenv_tokens;
 
 	setenv_tokens[1] = "OLDPWD";
-	setenv_tokens[2] = dets->cwd;
+	setenv_tokens[2] = info->cwd;
 
-	__setenv(dets);
+	__setenv(info);
 
-	free(dets->cwd);
-	dets->cwd = getcwd(NULL, 0);
+	free(info->cwd);
+	info->cwd = getcwd(NULL, 0);
 
 	setenv_tokens[1] = "PWD";
-	setenv_tokens[2] = dets->cwd;
+	setenv_tokens[2] = info->cwd;
 
-	__setenv(dets);
+	__setenv(info);
 
-	dets->tokens = tokens;
+	info->tokens = tokens;
 
-	dets->status = EXIT_SUCCESS;
+	info->status = EXIT_SUCCESS;
 }
 
 
 /**
  * __cd - changes the directory
- * @dets: arguments passed
+ * @info: arguments passed
  *
  * Return: int
  */
-int __cd(dets_t *dets)
+int __cd(info_t *info)
 {
-	char *dir = NULL, **args = dets->tokens + 1;
+	char *dir = NULL, **args = info->tokens + 1;
 
-	dets->status = EXIT_SUCCESS;
+	info->status = EXIT_SUCCESS;
 	if (*args)
 	{
 		if (!_strcmp(*args, "-"))
 		{
-			dir = dict_get_value(dets->envt, "OLDPWD");
+			dir = get_dict_val(info->env, "OLDPWD");
 			if (!dir)
-				dir = dets->cwd;
+				dir = info->cwd;
 
-			dets->status = chdir(dir);
-			if (!dets->status)
+			info->status = chdir(dir);
+			if (!info->status)
 			{
 				write(STDOUT_FILENO, dir, _strlen(dir));
 				write(STDOUT_FILENO, "\n", 1);
@@ -76,19 +76,19 @@ int __cd(dets_t *dets)
 		else
 		{
 			dir = *args;
-			dets->status = chdir(dir);
+			info->status = chdir(dir);
 		}
 	}
 	else
 	{
-		dir = dict_get_value(dets->envt, "HOME");
+		dir = get_dict_val(info->env, "HOME");
 		if (dir)
-			dets->status = chdir(dir);
+			info->status = chdir(dir);
 	}
-	if (dets->status != -1)
-		__cd_success(dets);
+	if (info->status != -1)
+		__cd_success(info);
 	else
-		__cd_error(dets, dir);
+		__cd_error(info, dir);
 
-	return (dets->status);
+	return (info->status);
 }

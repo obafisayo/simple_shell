@@ -2,7 +2,7 @@
 #define _ALIAS_H_
 
 #include "dict.h"
-#include "typedef.h"
+#include "types.h"
 
 typedef dict_t alias_t;
 

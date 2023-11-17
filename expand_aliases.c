@@ -15,7 +15,7 @@ void expand_aliases(alias_t *aliases, char ***tokptr)
 		return;
 	do {
 		name = expand_alias(aliases, tokptr);
-		value = dict_get_value(aliases, name);
+		value = get_dict_val(aliases, name);
 		if (value && *value && _isspace(value[_strlen(value) - 1]))
 		{
 			old = *tokptr;
@@ -54,7 +54,7 @@ char *expand_alias(alias_t *aliases, char ***tokptr)
 	{
 		if (!_strcmp(*tokens, aliases->key))
 		{
-			alias_tokens = tokenize(aliases->value);
+			alias_tokens = tokenize(aliases->val);
 			*tokptr = arrjoin(alias_tokens, tokens + 1);
 
 			free_tokens(&tokens);
@@ -62,7 +62,7 @@ char *expand_alias(alias_t *aliases, char ***tokptr)
 
 			return (aliases->key);
 		}
-		aliases = aliases->next_node;
+		aliases = aliases->next;
 	}
 	return (NULL);
 }

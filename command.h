@@ -5,10 +5,7 @@
 #include "quote.h"
 #include "string.h"
 #include "tokens.h"
-#include "typedef.h"
-#include "dets.h"
-#include "hsh.h"
-
+#include "types.h"
 
 /**
  * enum cmdlist_sep_n - numeric values for commmand list separators

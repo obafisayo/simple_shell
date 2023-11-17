@@ -3,37 +3,37 @@
 
 /**
  * read_input - get input
- * @dets: shell details
+ * @info: shell information
  *
  * Return: line size
  */
-bool read_input(dets_t *dets)
+bool read_input(info_t *info)
 {
 	char *line = NULL, *temp = NULL;
 
-	if (dets->from_terminal)
+	if (info->interactive)
 		write(STDERR_FILENO, "$ ", 2);
 
-	dets->linenom += 1;
-	while (_read_input(&dets->line, dets->filenom) &
+	info->lineno += 1;
+	while (_read_input(&info->line, info->fileno) &
 		(QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 	{
 		temp = line;
-		line = strjoin(NULL, "", temp, dets->line);
+		line = strjoin(NULL, "", temp, info->line);
 		free(temp);
-		free(dets->line);
-		if (dets->from_terminal)
+		free(info->line);
+		if (info->interactive)
 			write(STDERR_FILENO, "> ", 2);
-		dets->linenom += 1;
+		info->lineno += 1;
 	}
 	if (line)
 	{
-		temp = dets->line;
-		dets->line = strjoin(NULL, "", line, temp);
+		temp = info->line;
+		info->line = strjoin(NULL, "", line, temp);
 		free(temp);
 		free(line);
 	}
-	return (dets->line);
+	return (info->line);
 }
 
 
@@ -69,8 +69,6 @@ quote_state_t _read_input(char **lineptr, int fd)
 					index += 1;
 			} while (line[index]);
 		}
-		if (line != NULL)
-			free(line);
 	}
 	return (state);
 }
