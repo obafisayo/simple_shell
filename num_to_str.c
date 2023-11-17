@@ -21,10 +21,10 @@ static void _num_to_str(char **buf, size_t n)
  */
 char *num_to_str(size_t n)
 {
-	size_t tmp = n, len = 1;
+	size_t temporary = n, len = 1;
 	char *buf;
 
-	while (tmp /= 10)
+	while (temporary /= 10)
 		len++;
 	buf = malloc(len + 1);
 	if (!buf)
