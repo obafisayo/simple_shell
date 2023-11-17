@@ -6,16 +6,16 @@
  */
 void remove_comments(cmdlist_t *cmd)
 {
-	char **tokens, **new, *tmp;
+	char **tokens, **new, *temporary;
 
 	for (tokens = cmd->tokens; *tokens; ++tokens)
 	{
 		if (**tokens == '#')
 		{
-			tmp = *tokens;
+			temporary = *tokens;
 			*tokens = NULL;
 			new = arrdup(cmd->tokens);
-			*tokens = tmp;
+			*tokens = temporary;
 			free_tokens(&(cmd->tokens));
 			cmd->tokens = new;
 			free_cmdlist(&(cmd->next));
