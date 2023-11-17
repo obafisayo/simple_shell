@@ -10,33 +10,33 @@
 char **arrjoin(char **arr1, char **arr2)
 {
 	char **new;
-	size_t arr1_len = 0, arr2_len = 0, new_len;
+	size_t arr1_len = 0, arr2_len = 0, new_length;
 
 	if (arr1)
 	{
-		while (arr1[arr1_len])
-			++arr1_len;
+		while (arr1[arr1_length])
+			++arr1_length;
 	}
 	if (arr2)
 	{
-		while (arr2[arr2_len])
-			++arr2_len;
+		while (arr2[arr2_length])
+			++arr2_length;
 	}
-	new = malloc(sizeof(char *) * (arr1_len + arr2_len + 1));
+	new = malloc(sizeof(char *) * (arr1_len + arr2_length + 1));
 	if (!new)
 		return (NULL);
 
-	new_len = 0;
+	new_length = 0;
 	if (arr1)
 	{
 		while (*arr1)
-			new[new_len++] = _strdup(*arr1++);
+			new[new_length++] = _strdup(*arr1++);
 	}
 	if (arr2)
 	{
 		while (*arr2)
-			new[new_len++] = _strdup(*arr2++);
+			new[new_length++] = _strdup(*arr2++);
 	}
-	new[new_len] = NULL;
+	new[new_length] = NULL;
 	return (new);
 }
