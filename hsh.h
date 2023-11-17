@@ -26,7 +26,6 @@
 
 extern char **environ;
 
-bool read_dets(dets_t *dets);
 void free_tokens(char ***tokens);
 int exec(dets_t *dets);
 int _exec(dets_t *dets);
