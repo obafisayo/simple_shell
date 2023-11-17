@@ -20,6 +20,9 @@
 #include "getline.h"
 #include "err.h"
 #include "list.h"
+#include "quote.h"
+#include "tokens.h"
+#include "command.h"
 
 extern char **environ;
 
@@ -28,5 +31,6 @@ void free_tokens(char ***tokens);
 int exec(dets_t *dets);
 int _exec(dets_t *dets);
 void _sigint(int signal);
+bool read_input(dets_t *dets);
 
 #endif /* _HSH_H_*/

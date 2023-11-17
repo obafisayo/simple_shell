@@ -11,7 +11,9 @@
 #include "err.h"
 #include "getline.h"
 #include "alias.h"
-
+#include "quote.h"
+#include "tokens.h"
+#include "command.h"
 extern char **environ;
 
 /**
@@ -49,6 +51,7 @@ struct dets
 	envt_t *envt;
 	list_t *path;
 	alias_t *aliases;
+	cmdlist_t commands;
 };
 
 dets_t *init_dets(int argc, char **argv);

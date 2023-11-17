@@ -12,15 +12,16 @@ int main(int argc, char **argv)
 	dets_t *dets = init_dets(argc, argv);
 
 	signal(SIGINT, _sigint);
-	while (read_dets(dets))
+	while (read_input(dets))
 	{
-		dets->tokens = split_string(dets->line, " ");
-		exec(dets);
-		if (dets->tokens != NULL)
+		dets->commands = cmd_to_list(dets->line);
+		while ((dets->tokens = pop_cmd(&(dets->commands))))
 		{
-			free_string_array(dets->tokens);
-			dets->tokens = NULL;
+			exec(dets);
+			free_tokens(&(dets->tokens));
 		}
+		free(dets->line);
+		dets->line = NULL;
 	}
 	if (dets->from_terminal)
 		write(STDOUT_FILENO, "\n", 1);

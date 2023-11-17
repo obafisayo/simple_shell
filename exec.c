@@ -7,7 +7,6 @@
 */
 int exec(dets_t *dets)
 {
-	char *n = NULL;
 	const builtin_t *builtin = get_builtin(*dets->tokens);
 
 	if (builtin)
@@ -20,10 +19,7 @@ int exec(dets_t *dets)
 	}
 	else
 	{
-		n = _strdup(*dets->tokens);
-		dets->exe = n;
-		if(n != NULL)
-			n = NULL;
+		dets->exe = _strdup(*dets->tokens);
 	}
 	if (dets->exe && access(dets->exe, X_OK) == 0)
 	{

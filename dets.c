@@ -48,8 +48,7 @@ dets_t *init_dets(int argc, char **argv)
  */
 int free_dets(dets_t *dets)
 {
-	free_string_array(dets->tokens);
-	dets->tokens = NULL;
+	free_tokens(&dets->tokens);
 	free(dets->line);
 	free(dets->cwd);
 	dets->cwd = NULL;
@@ -58,5 +57,6 @@ int free_dets(dets_t *dets)
 	free_dict((dict_t **)&dets->envt);
 	free_dict(&dets->aliases);
 	free_list(&dets->path);
+	free_cmdlist(&dets->commands);
 	return (dets->status);
 }

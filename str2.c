@@ -51,8 +51,8 @@ char **split_string(const char *string, const char *delim)
 	char **words_arr;
 
 	str = _strdup(string);
-	token = strtok(str, delim);
-	for (; token != NULL; token = strtok(NULL, delim))
+	token = _strtok(str, delim);
+	for (; token != NULL; token = _strtok(NULL, delim))
 	{
 		t++;
 	}
@@ -65,8 +65,8 @@ char **split_string(const char *string, const char *delim)
 	}
 	i = 0;
 	str = _strdup(string);
-	token = strtok(str, delim);
-	for (; token != NULL; token = strtok(NULL, delim))
+	token = _strtok(str, delim);
+	for (; token != NULL; token = _strtok(NULL, delim))
 	{
 		len = _strlen(token);
 		if (len > 0 && token[len - 1] == '\n')
