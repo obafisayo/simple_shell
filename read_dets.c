@@ -33,6 +33,8 @@ bool read_dets(dets_t *dets)
 		line = n;
 		if (n != NULL)
 			free(n);
+		if (temp != NULL)
+			free(temp);
 		free(newline);
 	}
 	temp = line;
@@ -46,6 +48,8 @@ bool read_dets(dets_t *dets)
 		old_pos += backslash_pos + 1;
 	}
 	dets->line = line;
+	if (temp != NULL)
+		free(temp);
 	if (newline != NULL && (backslash_pos = _strchr(temp, '\\')) != -1)
 		free(newline);
 	return (true);
