@@ -10,7 +10,7 @@
  */
 int parse(dets_t *dets)
 {
-	char **tokens, *tok;
+	char **tokens, *toks;
 	size_t n = 0;
 	cmdlist_t *cmd = dets->commands = cmd_to_list(dets->line);
 
@@ -38,10 +38,10 @@ int parse(dets_t *dets)
 			continue;
 		}
 		tokens = cmd->tokens;
-		for (tok = *tokens; tok; tok = *(++tokens))
+		for (toks = *tokens; toks; toks = *(++tokens))
 		{
-			*tokens = dequote(tok);
-			free(tok);
+			*tokens = dequote(toks);
+			free(toks);
 		}
 		cmd = cmd->next;
 		++n;
