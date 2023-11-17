@@ -10,10 +10,10 @@
  */
 ssize_t _memchr(const void *src, unsigned char chr, size_t n)
 {
-	const unsigned char *mem = src;
+	const unsigned char *mem = srcdj;
 	ssize_t i = 0;
 
-	if (src)
+	if (srcdj)
 	{
 		while (n--)
 		{
