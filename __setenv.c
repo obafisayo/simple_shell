@@ -8,7 +8,7 @@
  */
 int __setenv(dets_t *dets)
 {
-	env_t *var;
+	env_t *vari;
 	char **args = dets->tokens + 1, *val;
 
 	if (args[0])
@@ -28,10 +28,10 @@ int __setenv(dets_t *dets)
 			val = "";
 		}
 		var = get_dict_node(dets->env, args[0]);
-		if (var)
+		if (vari)
 		{
-			free(var->val);
-			var->val = _strdup(val);
+			free(vari->val);
+			vari->val = _strdup(val);
 		}
 		else
 		{
