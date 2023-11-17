@@ -9,27 +9,30 @@
 bool read_dets(dets_t *dets)
 {
 	char *temp = NULL, *line = NULL, *newline = NULL;
+	char *n = NULL;
 	ssize_t backslash_pos, old_pos = 1;
 
 	if (dets->from_terminal)
 		write(STDERR_FILENO, "$ ", 2);
-
 	dets->linenom += 1;
-
-	line = _getline(dets->filenom);
-	if (!line)
+	n = _getline(dets->filenom);
+	if (!n)
 		return (false);
+	line = n;
+	if (n != NULL)
+		free(n);
 	while (_strlen(line) > 0 && line[_strlen(line) - 2] == '\\')
 	{
 		if (dets->from_terminal)
-		{
 			write(STDOUT_FILENO, "> ", 2);
-		}
 		dets->linenom += 1;
 		line[_strlen(line) - 2] = '\0';
 		temp = line;
 		newline = _getline(dets->filenom);
-		line = strjoin(NULL, "", temp, newline);
+		n = strjoin(NULL, "", temp, newline);
+		line = n;
+		if (n != NULL)
+			free(n);
 		free(newline);
 	}
 	temp = line;
