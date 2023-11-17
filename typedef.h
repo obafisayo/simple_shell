@@ -5,5 +5,7 @@ typedef struct dets dets_t;
 typedef struct dict dict_t;
 typedef struct list_s list_t;
 typedef struct builtin builtin_t;
+typedef struct cmdlist cmdlist_t;
+typedef struct cmdtree cmdtree_t;
 
 #endif /* _TYPEDEF_H_*/
