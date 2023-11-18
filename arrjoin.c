@@ -20,7 +20,7 @@ char **arrjoin(char **arr1, char **arr2)
 	if (arr2)
 	{
 		while (arr2[arr2_len])
-			++arr2_len
+			++arr2_len;
 	}
 	new = malloc(sizeof(char *) * (arr1_len + arr2_len + 1));
 	if (!new)
