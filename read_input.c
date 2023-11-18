@@ -18,7 +18,7 @@ bool read_input(dets_t *dets)
 	while (_read_input(&dets->line, dets->fileno) &
 		(QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 	{
-		temporay = line;
+		temporary = line;
 		line = strjoin(NULL, "", temporary, dets->line);
 		free(temporary);
 		free(dets->line);

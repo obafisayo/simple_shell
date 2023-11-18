@@ -27,7 +27,7 @@ int __setenv(dets_t *dets)
 		{
 			val = "";
 		}
-		var = get_dict_node(dets->env, args[0]);
+		vari = get_dict_node(dets->env, args[0]);
 		if (vari)
 		{
 			free(vari->val);

@@ -19,7 +19,7 @@ cmdlist_t *add_cmd_end(cmdlist_t **headptr, const char *cmd)
 		return (add_cmd_end(&((*headptr)->next), cmd));
 
 	new = malloc(sizeof(cmdlist_t));
-	if (!newt)
+	if (!new)
 		return (NULL);
 
 	new->next = NULL;
